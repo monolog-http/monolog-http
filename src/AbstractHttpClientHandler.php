@@ -1,6 +1,6 @@
 <?php
 
-namespace MonologHttplug;
+namespace MonologHttp;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
@@ -8,7 +8,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 
-abstract class HttpClientHandler extends AbstractProcessingHandler
+abstract class AbstractHttpClientHandler extends AbstractProcessingHandler
 {
     /**
      * @var ClientInterface

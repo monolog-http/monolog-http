@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MonologHttplug;
+namespace MonologHttp;
 
 use Monolog\Formatter\FlowdockFormatter;
 use Monolog\Formatter\FormatterInterface;
@@ -19,7 +19,7 @@ use Psr\Http\Message\RequestInterface;
  *
  * @see https://www.flowdock.com/api/push
  */
-final class FlowdockHandler extends HttpClientHandler
+final class FlowdockHandler extends AbstractHttpClientHandler
 {
     /**
      * @var string
@@ -28,6 +28,13 @@ final class FlowdockHandler extends HttpClientHandler
 
     private $uri;
 
+    /**
+     * @param ClientInterface $client
+     * @param RequestFactoryInterface $requestFactory
+     * @param $uri
+     * @param string|null $apiToken
+     * @param int|string $level The minimum logging level at which this handler will be triggered
+     */
     public function __construct(
         ClientInterface $client,
         RequestFactoryInterface $requestFactory,

@@ -1,8 +1,12 @@
 <?php
 
-namespace MonologHttplug;
+declare(strict_types=1);
 
-class ExampleTest extends \PHPUnit\Framework\TestCase
+namespace MonologHttp;
+
+use PHPUnit\Framework\TestCase;
+
+class ExampleTest extends TestCase
 {
     /**
      * Test that true does in fact equal true

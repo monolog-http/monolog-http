@@ -1,12 +1,12 @@
 {
-    "name": "gmponos/monolog-httplug",
+    "name": "gmponos/monolog-http",
     "type": "library",
     "description": "A collection of HTTPlug handlers",
     "keywords": [
         "gmponos",
         "monolog-httplug"
     ],
-    "homepage": "https://github.com/gmponos/monolog-httplug",
+    "homepage": "https://github.com/gmponos/monolog-http",
     "license": "MIT",
     "authors": [
         {
@@ -17,24 +17,24 @@
         }
     ],
     "require": {
-        "php": "~7.1",
+        "php": "^7.2",
         "ext-json": "*",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
-        "monolog/monolog": "dev-master as 2.0",
+        "monolog/monolog": "^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": ">=7.5",
+        "phpunit/phpunit": "^8.5 || ^9.1",
         "squizlabs/php_codesniffer": "^3.4"
     },
     "autoload": {
         "psr-4": {
-            "MonologHttplug\\": "src"
+            "MonologHttp\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MonologHttplug\\": "tests"
+            "MonologHttp\\Tests\\": "tests"
         }
     },
     "scripts": {

@@ -1,16 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
-namespace MonologHttplug\Formatter;
+namespace MonologHttp\Formatter;
 
 use Monolog\Formatter\FormatterInterface;
 
-class SendgridFormatter implements FormatterInterface
+final class SendgridFormatter implements FormatterInterface
 {
     /**
      * Formats a log record.
      *
-     * @param  array $record A record to format
+     * @param array $record A record to format
      * @return mixed The formatted record
      */
     public function format(array $record)
@@ -35,7 +36,7 @@ class SendgridFormatter implements FormatterInterface
     /**
      * Formats a set of log records.
      *
-     * @param  array $records A set of records to format
+     * @param array $records A set of records to format
      * @return mixed The formatted set of records
      */
     public function formatBatch(array $records)

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MonologHttplug;
+namespace MonologHttp;
 
 use Monolog\Logger;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 
-class SendGridHandler extends HttpClientHandler
+class SendGridHandler extends AbstractHttpClientHandler
 {
     /**
      * The SendGrid API User
