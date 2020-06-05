@@ -1,12 +1,17 @@
 {
-    "name": "gmponos/monolog-http",
+    "name": "monolog-http/monolog-http",
     "type": "library",
-    "description": "A collection of HTTPlug handlers",
+    "description": "A collection of monolog handlers using PSR-18 http client",
     "keywords": [
-        "gmponos",
-        "monolog-httplug"
+        "monolog",
+        "http",
+        "http-clients",
+        "psr3",
+        "psr17",
+        "psr18",
+        "monolog-http"
     ],
-    "homepage": "https://github.com/gmponos/monolog-http",
+    "homepage": "https://github.com/monolog-http/monolog-http",
     "license": "MIT",
     "authors": [
         {
@@ -36,11 +41,6 @@
         "psr-4": {
             "MonologHttp\\Tests\\": "tests"
         }
-    },
-    "scripts": {
-        "test": "phpunit",
-        "check-style": "phpcs src tests",
-        "fix-style": "phpcbf src tests"
     },
     "extra": {
         "branch-alias": {

@@ -1,5 +1,10 @@
 build
 composer.lock
 vendor
+
+### codesniffer
 phpcs.xml
+
+### phpunit
 phpunit.xml
+.phpunit.result.cache
