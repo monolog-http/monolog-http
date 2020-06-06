@@ -41,12 +41,12 @@ Please check our [issue](https://github.com/monolog-http/monolog-http/issues) if
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/gmponos/monolog-http.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/monolog-http/monolog-http.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/gmponos/monolog-http/master.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/gmponos/monolog-http.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/monolog-http/monolog-http/master.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/monolog-http/monolog-http.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/gmponos/monolog-http
-[link-travis]: https://travis-ci.org/gmponos/monolog-http
-[link-downloads]: https://packagist.org/packages/gmponos/monolog-http
+[link-packagist]: https://packagist.org/packages/monolog-http/monolog-http
+[link-travis]: https://travis-ci.org/monolog-http/monolog-http
+[link-downloads]: https://packagist.org/packages/monolog-http/monolog-http
 [link-contributors]: ../../contributors
