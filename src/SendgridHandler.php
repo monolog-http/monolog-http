@@ -9,7 +9,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 
-class SendGridHandler extends AbstractHttpClientHandler
+final class SendGridHandler extends AbstractHttpClientHandler
 {
     /**
      * The SendGrid API User
