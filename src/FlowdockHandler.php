@@ -11,6 +11,7 @@ use Monolog\Logger;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Sends notifications through the Flowdock push API
@@ -22,16 +23,19 @@ use Psr\Http\Message\RequestInterface;
 final class FlowdockHandler extends AbstractHttpClientHandler
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $apiToken;
 
+    /**
+     * @var UriInterface|string
+     */
     private $uri;
 
     /**
      * @param ClientInterface $client
      * @param RequestFactoryInterface $requestFactory
-     * @param $uri
+     * @param UriInterface|string $uri
      * @param string|null $apiToken
      * @param int|string $level The minimum logging level at which this handler will be triggered
      */
@@ -45,6 +49,7 @@ final class FlowdockHandler extends AbstractHttpClientHandler
     ) {
         parent::__construct($client, $requestFactory, $level, $bubble);
         $this->apiToken = $apiToken;
+        $this->uri = $uri;
     }
 
     public function setFormatter(FormatterInterface $formatter): HandlerInterface
@@ -63,7 +68,7 @@ final class FlowdockHandler extends AbstractHttpClientHandler
 
     public function createRequest(array $record): RequestInterface
     {
-        $body = json_encode($record['formatted']['flowdock']);
+        $body = \json_encode($record['formatted']['flowdock']);
         if ($body === false) {
             throw new \InvalidArgumentException('Could not format record to json');
         };
