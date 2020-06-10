@@ -64,7 +64,7 @@ final class SlackWebhookHandler extends AbstractProcessingHandler
     public function setFormatter(FormatterInterface $formatter): HandlerInterface
     {
         if (!$formatter instanceof SlackFormatterInterface) {
-            throw new \InvalidArgumentException(sprintf('Expected an instance of %s', SlackFormatterInterface::class));
+            throw new \InvalidArgumentException(\sprintf('Expected an instance of %s', SlackFormatterInterface::class));
         }
 
         return parent::setFormatter($formatter);
@@ -72,7 +72,7 @@ final class SlackWebhookHandler extends AbstractProcessingHandler
 
     protected function write(array $record): void
     {
-        $body = json_encode($record['formatted']);
+        $body = \json_encode($record['formatted']);
         if ($body === false) {
             throw new \InvalidArgumentException('Could not format record to json');
         };

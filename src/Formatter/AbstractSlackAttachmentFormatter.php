@@ -54,7 +54,7 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
     ) {
         parent::__construct();
         $this->username = $username;
-        $this->emoji = $emoji !== null ? trim($emoji, ':') : null;
+        $this->emoji = $emoji !== null ? \trim($emoji, ':') : null;
         $this->includeContextAndExtra = $includeContextAndExtra;
         $this->channel = $channel;
     }
@@ -72,7 +72,7 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         }
 
         if ($this->emoji !== null) {
-            $data['icon_emoji'] = sprintf(':%s:', $this->emoji);
+            $data['icon_emoji'] = \sprintf(':%s:', $this->emoji);
         }
 
         if ($this->channel !== null) {
@@ -104,20 +104,20 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
      */
     protected function normalize($data, $depth = 0)
     {
-        if ($data === null || is_scalar($data)) {
+        if ($data === null || \is_scalar($data)) {
             return $this->normalizeScalar($data);
         }
 
-        if (is_array($data) || $data instanceof \Traversable) {
+        if (\is_array($data) || $data instanceof \Traversable) {
             return $this->normalizeArray($data);
         }
 
-        if (is_object($data)) {
+        if (\is_object($data)) {
             return $this->normalizeObject($data);
         }
 
-        if (is_resource($data)) {
-            return ['resource' => get_resource_type($data)];
+        if (\is_resource($data)) {
+            return ['resource' => \get_resource_type($data)];
         }
 
         return $data;
@@ -126,7 +126,7 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
     protected function normalizeException($e, $depth = 0): array
     {
         return [
-            'class' => get_class($e),
+            'class' => \get_class($e),
             'message' => $e->getMessage(),
             'code' => $e->getCode(),
             'file' => $e->getFile() . ':' . $e->getLine(),
@@ -158,8 +158,8 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
 
     protected function truncateStringIfNeeded(string $string): string
     {
-        if (strlen($string) > 1950) {
-            $string = substr($string, 0, 1900) . '... (truncated)';
+        if (\strlen($string) > 1950) {
+            $string = \substr($string, 0, 1900) . '... (truncated)';
         }
 
         return $string;
@@ -185,9 +185,9 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
             return $this->normalizeException($data);
         }
 
-        $class = get_class($data);
+        $class = \get_class($data);
 
-        if (method_exists($data, '__toString')) {
+        if (\method_exists($data, '__toString')) {
             return [$class => $data->__toString()];
         }
 
@@ -196,7 +196,7 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         }
 
         // the rest is json-serialized in some way
-        $value = json_decode($this->toJson($data, true), true);
+        $value = \json_decode($this->toJson($data, true), true);
         return [$class => $value];
     }
 
@@ -232,7 +232,7 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
             }
 
             $normalized = $this->normalize($record[$key]);
-            $fields = array_merge(
+            $fields = \array_merge(
                 $fields,
                 $this->formatFields($normalized)
             );
@@ -247,11 +247,11 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
      */
     private function normalizeScalar($data)
     {
-        if (is_float($data)) {
-            if (is_infinite($data)) {
+        if (\is_float($data)) {
+            if (\is_infinite($data)) {
                 return ($data > 0 ? '' : '-') . 'INF';
             }
-            if (is_nan($data)) {
+            if (\is_nan($data)) {
                 return 'NaN';
             }
         }
