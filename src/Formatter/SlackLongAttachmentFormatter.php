@@ -22,7 +22,9 @@ final class SlackLongAttachmentFormatter extends AbstractSlackAttachmentFormatte
         $result = [];
         foreach ($record as $key => $value) {
             if (\is_array($value)) {
-                $value = $this->truncateStringIfNeeded($this->toJson($value, true));
+                /** @var string $string */
+                $string = $this->toJson($value, true);
+                $value = $this->truncateStringIfNeeded($string);
 
                 $value = \sprintf('```%s```', $value);
                 $result[] = [

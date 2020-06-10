@@ -123,7 +123,7 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         return $data;
     }
 
-    protected function normalizeException($e, $depth = 0): array
+    protected function normalizeException(Throwable $e, int $depth = 0): array
     {
         return [
             'class' => \get_class($e),
@@ -172,10 +172,9 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
     abstract protected function formatFields(array $record): array;
 
     /**
-     * @param mixed $data
-     * @return array|string|int|float
+     * @return array|string
      */
-    private function normalizeObject($data)
+    private function normalizeObject(object $data)
     {
         if ($data instanceof \DateTimeInterface) {
             return $data->format($this->dateFormat);
@@ -196,7 +195,9 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         }
 
         // the rest is json-serialized in some way
-        $value = \json_decode($this->toJson($data, true), true);
+        /** @var string $string */
+        $string = $this->toJson($data, true);
+        $value = \json_decode($string, true);
         return [$class => $value];
     }
 

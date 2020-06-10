@@ -15,7 +15,9 @@ final class SlackShortAttachmentFormatter extends AbstractSlackAttachmentFormatt
 {
     protected function formatFields(array $record): array
     {
-        $value = $this->truncateStringIfNeeded($this->toJson($record, true));
+        /** @var string $string */
+        $string = $this->toJson($record, true);
+        $value = $this->truncateStringIfNeeded($string);
         $value = \sprintf('```%s```', $value);
         return [
             [
