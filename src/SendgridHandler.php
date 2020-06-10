@@ -9,7 +9,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 
-class SendGridHandler extends AbstractHttpClientHandler
+final class SendGridHandler extends AbstractHttpClientHandler
 {
     /**
      * The SendGrid API User
@@ -76,11 +76,9 @@ class SendGridHandler extends AbstractHttpClientHandler
         $this->subject = $subject;
     }
 
-
-
     public function createRequest(array $record): RequestInterface
     {
-        $body = json_encode($record['formatted']['flowdock']);
+        $body = \json_encode($record['formatted']['flowdock']);
         if ($body === false) {
             throw new \InvalidArgumentException('Could not format record to json');
         };

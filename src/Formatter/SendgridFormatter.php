@@ -24,7 +24,7 @@ final class SendgridFormatter implements FormatterInterface
             $message['to[]'] = $recipient;
         }
         $message['subject'] = $this->subject;
-        $message['date'] = date('r');
+        $message['date'] = \date('r');
 
         if ($this->isHtmlBody($content)) {
             $message['html'] = $content;

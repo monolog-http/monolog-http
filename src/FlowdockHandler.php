@@ -63,7 +63,7 @@ final class FlowdockHandler extends AbstractHttpClientHandler
 
     public function createRequest(array $record): RequestInterface
     {
-        $body = json_encode($record['formatted']['flowdock']);
+        $body = \json_encode($record['formatted']['flowdock']);
         if ($body === false) {
             throw new \InvalidArgumentException('Could not format record to json');
         };

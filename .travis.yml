@@ -24,12 +24,7 @@ before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
 
 script:
-  - vendor/bin/phpcs src/
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
-
-after_script:
-  - |
-    if [[ "$TRAVIS_PHP_VERSION" != 'hhvm' && "$TRAVIS_PHP_VERSION" != '7.0' ]]; then
-      wget https://scrutinizer-ci.com/ocular.phar
-      php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-    fi
+  - php vendor/bin/phpcs src/ tests/ -n
+  - php vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - php vendor/bin/phpstan analyse ./src ./tests
+  - php bin/php-cs-fixer.phar fix --dry-run --diff --diff-format=udiff

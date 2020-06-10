@@ -10,8 +10,10 @@ class ExampleTest extends TestCase
 {
     /**
      * Test that true does in fact equal true
+     *
+     * @test
      */
-    public function testTrueIsTrue()
+    public function trueIsTrue(): void
     {
         $this->assertTrue(true);
     }
