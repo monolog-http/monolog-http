@@ -10,4 +10,5 @@
     <arg value="s" />
 
     <rule ref="PSR12" />
+    <rule ref="PEAR.WhiteSpace.ObjectOperatorIndent"/>
 </ruleset>
