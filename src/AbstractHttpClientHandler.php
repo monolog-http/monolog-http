@@ -23,8 +23,6 @@ abstract class AbstractHttpClientHandler extends AbstractProcessingHandler
     protected $requestFactory;
 
     /**
-     * @param ClientInterface $client
-     * @param RequestFactoryInterface $requestFactory
      * @param int|string $level The minimum logging level at which this handler will be triggered
      * @param bool $bubble Whether the messages that are handled can bubble up the stack or not
      */
