@@ -17,9 +17,9 @@ class TelegramHandlerTest extends TestCase
      */
     public function createRequest(): void
     {
-        /** @var ClientInterface | MockObject $mockClient */
+        /** @var MockObject $mockClient */
         $mockClient = $this->getMockBuilder(ClientInterface::class)->getMock();
-        /** @var RequestFactoryInterface | MockObject $mockRequestFactory */
+        /** @var MockObject $mockRequestFactory */
         $mockRequestFactory = $this->getMockBuilder(RequestFactoryInterface::class)
             ->getMock();
         $mockBody = $this->getMockBuilder(StreamInterface::class)->getMock();
@@ -38,11 +38,17 @@ class TelegramHandlerTest extends TestCase
             ->with('Content-Type', ['application/json'])
             ->willReturn($mockRequest);
 
+        // @note workaround for the phpstan multiple types issue https://github.com/phpstan/phpstan-phpunit/issues/58
+        /** @var RequestFactoryInterface $requestFactory */
+        $requestFactory = $mockRequestFactory;
+        /** @var ClientInterface $client */
+        $client = $mockClient;
+
         $telegramHandler = new TelegramHandler(
             'TelegramApiKey',
             1234,
-            $mockClient,
-            $mockRequestFactory
+            $client,
+            $requestFactory
         );
         $actualRequest = $telegramHandler->createRequest(
             ['formatted' => 'This is an error message']

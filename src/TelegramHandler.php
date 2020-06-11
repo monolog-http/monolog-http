@@ -17,8 +17,14 @@ final class TelegramHandler extends AbstractHttpClientHandler
 {
     private const TELEGRAM_API = 'https://api.telegram.org/bot';
 
+    /**
+     * @var string
+     */
     private $apiKey;
 
+    /**
+     * @var int|string
+     */
     private $chatId;
 
     /**
