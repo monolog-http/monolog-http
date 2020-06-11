@@ -14,7 +14,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use MonologHttp\Formatter\SlackFormatterInterface;
 use MonologHttp\Formatter\SlackShortAttachmentFormatter;
-use MonologHttp\Handler\SlackWebhookHandler;
+use MonologHttp\SlackWebhookHandler;
 use MonologHttp\Tests\Unit\TestCase;
 
 final class SlackWebhookHandlerTest extends TestCase
