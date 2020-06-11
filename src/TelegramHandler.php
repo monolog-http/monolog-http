@@ -28,12 +28,8 @@ final class TelegramHandler extends AbstractHttpClientHandler
     private $chatId;
 
     /**
-     * @param string $apiKey
      * @param int|string $chatId
-     * @param ClientInterface $client
-     * @param RequestFactoryInterface $requestFactory
-     * @param int $level
-     * @param bool $bubble
+     * @param int|string $level
      */
     public function __construct(
         string $apiKey,
@@ -51,9 +47,6 @@ final class TelegramHandler extends AbstractHttpClientHandler
     /**
      * Create request to @link https://api.telegram.org/bot on SendMessage action
      * @see https://core.telegram.org/bots/api#sendmessage
-     *
-     * @param array $record
-     * @return RequestInterface
      */
     public function createRequest(array $record): RequestInterface
     {
@@ -63,9 +56,11 @@ final class TelegramHandler extends AbstractHttpClientHandler
             'chat_id' => $this->chatId,
             'text' => $record['formatted'],
         ];
+
+        /** @var string $jsonBody */
         $jsonBody = \json_encode($body);
-        if (false === $jsonBody) {
-            throw new InvalidArgumentException('Could not format record to json');
+        if (\JSON_ERROR_NONE !== \json_last_error()) {
+            throw new InvalidArgumentException(\json_last_error_msg());
         }
 
         $request->getBody()->write($jsonBody);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MonologHttp\Tests;
 
 use MonologHttp\TelegramHandler;
@@ -18,16 +20,15 @@ class TelegramHandlerTest extends TestCase
     public function createRequest(): void
     {
         /** @var MockObject $mockClient */
-        $mockClient = $this->getMockBuilder(ClientInterface::class)->getMock();
+        $mockClient = $this->createMock(ClientInterface::class);
         /** @var MockObject $mockRequestFactory */
-        $mockRequestFactory = $this->getMockBuilder(RequestFactoryInterface::class)
-            ->getMock();
-        $mockBody = $this->getMockBuilder(StreamInterface::class)->getMock();
+        $mockRequestFactory = $this->createMock(RequestFactoryInterface::class);
+        $mockBody = $this->createMock(StreamInterface::class);
         $mockBody->expects($this->once())
             ->method('write')
             ->with('{"chat_id":1234,"text":"This is an error message"}');
         $mockBody->expects($this->once())->method('rewind');
-        $mockRequest = $this->getMockBuilder(RequestInterface::class)->getMock();
+        $mockRequest = $this->createMock(RequestInterface::class);
         $mockRequest->expects($this->exactly(2))->method('getBody')->willReturn($mockBody);
         $mockRequestFactory->expects($this->once())
             ->method('createRequest')

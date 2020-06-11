@@ -54,5 +54,6 @@ return PhpCsFixer\Config::create()
         'ternary_to_null_coalescing' => true,
         'trim_array_spaces' => true,
         'void_return' => true,
+        'no_superfluous_phpdoc_tags' => true,
     ])
     ->setFinder($finder);
