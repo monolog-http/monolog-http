@@ -12,7 +12,10 @@ use Psr\Http\Message\StreamInterface;
 
 class TelegramHandlerTest extends TestCase
 {
-    public function testCreateRequest()
+    /**
+     * @test
+     */
+    public function createRequest(): void
     {
         /** @var ClientInterface | MockObject $mockClient */
         $mockClient = $this->getMockBuilder(ClientInterface::class)->getMock();

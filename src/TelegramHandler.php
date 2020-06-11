@@ -12,7 +12,6 @@ use InvalidArgumentException;
 
 /**
  * Logs to Telegram.
- *
  */
 final class TelegramHandler extends AbstractHttpClientHandler
 {
@@ -52,13 +51,13 @@ final class TelegramHandler extends AbstractHttpClientHandler
      */
     public function createRequest(array $record): RequestInterface
     {
-        $uri = sprintf('%s%s%s', self::TELEGRAM_API, $this->apiKey, '/sendMessage');
+        $uri = \sprintf('%s%s%s', self::TELEGRAM_API, $this->apiKey, '/sendMessage');
         $request = $this->requestFactory->createRequest('POST', $uri)->withHeader('Content-Type', ['application/json']);
         $body = [
             'chat_id' => $this->chatId,
             'text' => $record['formatted'],
         ];
-        $jsonBody = json_encode($body);
+        $jsonBody = \json_encode($body);
         if (false === $jsonBody) {
             throw new InvalidArgumentException('Could not format record to json');
         }
