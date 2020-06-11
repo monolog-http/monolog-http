@@ -42,9 +42,6 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
 
     /**
      * @param string|null $username The username of the bot.
-     * @param string|null $emoji
-     * @param bool $includeContextAndExtra
-     * @param string|null $channel
      */
     public function __construct(
         ?string $username = null,
@@ -59,10 +56,6 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         $this->channel = $channel;
     }
 
-    /**
-     * @param array $record
-     * @return array
-     */
     public function format(array $record): array
     {
         $data = [];
@@ -136,9 +129,6 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
     /**
      * Returned a Slack message attachment color associated with
      * provided level.
-     *
-     * @param int $level
-     * @return string
      */
     protected function getAttachmentColor(int $level): string
     {
@@ -165,10 +155,6 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         return $string;
     }
 
-    /**
-     * @param array $record
-     * @return array
-     */
     abstract protected function formatFields(array $record): array;
 
     /**
@@ -203,7 +189,6 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
 
     /**
      * @param array|\Traversable $data
-     * @return array
      */
     private function normalizeArray($data): array
     {
@@ -220,10 +205,6 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         return $normalized;
     }
 
-    /**
-     * @param array $record
-     * @return array
-     */
     private function createAttachmentFields(array $record): array
     {
         $fields = [];

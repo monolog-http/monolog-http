@@ -13,10 +13,7 @@ namespace MonologHttp\Formatter;
  */
 final class SlackLongAttachmentFormatter extends AbstractSlackAttachmentFormatter
 {
-    /**
-     * @param array $record
-     * @return array
-     */
+
     protected function formatFields(array $record): array
     {
         $result = [];

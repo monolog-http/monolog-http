@@ -67,8 +67,6 @@ final class SlackLineFormatterTest extends TestCase
 
     /**
      * @dataProvider correctEmojiProvider
-     * @param string $emoji
-     * @param string $expectedEmoji
      *
      * @test
      */

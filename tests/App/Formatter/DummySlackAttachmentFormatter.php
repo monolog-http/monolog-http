@@ -14,10 +14,6 @@ final class DummySlackAttachmentFormatter extends AbstractSlackAttachmentFormatt
         $this->dateFormat = 'Y-m-d H:i:s';
     }
 
-    /**
-     * @param array $record
-     * @return array
-     */
     protected function formatFields(array $record): array
     {
         return [$record];

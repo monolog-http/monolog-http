@@ -36,8 +36,6 @@ final class SlackWebhookHandler extends AbstractProcessingHandler
     private $requestFactory;
 
     /**
-     * @param ClientInterface $client
-     * @param RequestFactoryInterface $requestFactory
      * @param string $webhook Slack Webhook string
      * @param string|int $level The minimum logging level at which this handler will be triggered
      * @param bool $bubble Whether the messages that are handled can bubble up the stack or not
@@ -57,8 +55,6 @@ final class SlackWebhookHandler extends AbstractProcessingHandler
     }
 
     /**
-     * @param FormatterInterface $formatter
-     * @return HandlerInterface
      * @throws \InvalidArgumentException
      */
     public function setFormatter(FormatterInterface $formatter): HandlerInterface

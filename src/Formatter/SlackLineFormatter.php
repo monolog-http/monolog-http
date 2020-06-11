@@ -38,12 +38,6 @@ final class SlackLineFormatter extends NormalizerFormatter implements SlackForma
      */
     private $channel;
 
-    /**
-     * @param string|null $username
-     * @param string|null $emoji
-     * @param string|null $format
-     * @param string|null $channel
-     */
     public function __construct(
         ?string $username = null,
         ?string $emoji = null,
@@ -58,10 +52,6 @@ final class SlackLineFormatter extends NormalizerFormatter implements SlackForma
         $this->channel = $channel;
     }
 
-    /**
-     * @param array $record
-     * @return array
-     */
     public function format(array $record): array
     {
         $data['text'] = $this->lineFormatter->format($record);

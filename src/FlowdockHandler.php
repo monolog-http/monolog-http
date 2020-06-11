@@ -33,10 +33,7 @@ final class FlowdockHandler extends AbstractHttpClientHandler
     private $uri;
 
     /**
-     * @param ClientInterface $client
-     * @param RequestFactoryInterface $requestFactory
      * @param UriInterface|string $uri
-     * @param string|null $apiToken
      * @param int|string $level The minimum logging level at which this handler will be triggered
      */
     public function __construct(

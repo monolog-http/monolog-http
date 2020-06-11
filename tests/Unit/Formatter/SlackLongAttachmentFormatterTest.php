@@ -15,9 +15,6 @@ final class SlackLongAttachmentFormatterTest extends TestCase
      */
     private $jsonFlags;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();

@@ -210,9 +210,7 @@ final class SlackShortAttachmentFormatterTest extends TestCase
     }
 
     /**
-     * @param string|null $username
      * @param string $userIcon
-     * @param bool $includeContextAndExtra
      * @return SlackShortAttachmentFormatter
      */
     private function createFormatter(
