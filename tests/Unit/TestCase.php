@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Test\Unit;
+namespace MonologHttp\Tests\Unit;
 
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase as PhpUnitTestCase;
 
-class TestCase extends PhpUnitTestCase
+abstract class TestCase extends PhpUnitTestCase
 {
     /**
      * @param int $level

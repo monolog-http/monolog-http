@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Test\Unit\Formatter;
+namespace MonologHttp\Tests\Unit\Formatter;
 
 use Monolog\Logger;
-use MonologHttp\Test\App\FooBar\TestBarNorm;
-use MonologHttp\Test\App\FooBar\TestFooNorm;
-use MonologHttp\Test\App\FooBar\TestJsonSerializableNorm;
-use MonologHttp\Test\App\Formatter\DummySlackAttachmentFormatter;
-use MonologHttp\Test\Unit\TestCase;
+use MonologHttp\Tests\App\FooBar\TestBarNorm;
+use MonologHttp\Tests\App\FooBar\TestFooNorm;
+use MonologHttp\Tests\App\FooBar\TestJsonSerializableNorm;
+use MonologHttp\Tests\App\Formatter\DummySlackAttachmentFormatter;
+use MonologHttp\Tests\Unit\TestCase;
 
 final class AbstractSlackAttachmentFormatterTest extends TestCase
 {
@@ -58,11 +58,11 @@ final class AbstractSlackAttachmentFormatterTest extends TestCase
                             'nan' => 'NaN',
                         ],
                         [
-                            'foo' => ['MonologHttp\Test\App\FooBar\TestFooNorm' => ['foo' => 'foo']],
-                            'bar' => ['MonologHttp\Test\App\FooBar\TestBarNorm' => 'bar'],
+                            'foo' => ['MonologHttp\Tests\App\FooBar\TestFooNorm' => ['foo' => 'foo']],
+                            'bar' => ['MonologHttp\Tests\App\FooBar\TestBarNorm' => 'bar'],
                             'baz' => [],
                             'res' => ['resource' => 'stream'],
-                            'json' => ['MonologHttp\Test\App\FooBar\TestJsonSerializableNorm' => ['foo' => 'bar']],
+                            'json' => ['MonologHttp\Tests\App\FooBar\TestJsonSerializableNorm' => ['foo' => 'bar']],
                             'date_object' => $dateTime->format('Y-m-d H:i:s'),
                         ],
                     ],

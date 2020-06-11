@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Test\Unit\Formatter;
+namespace MonologHttp\Tests\Unit\Formatter;
 
 use Monolog\Logger;
 use MonologHttp\Formatter\SlackShortAttachmentFormatter;
-use MonologHttp\Test\Unit\TestCase;
+use MonologHttp\Tests\Unit\TestCase;
 
 final class SlackShortAttachmentFormatterTest extends TestCase
 {

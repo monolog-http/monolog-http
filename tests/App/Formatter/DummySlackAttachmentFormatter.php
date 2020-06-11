@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Test\App\Formatter;
+namespace MonologHttp\Tests\App\Formatter;
 
 use MonologHttp\Formatter\AbstractSlackAttachmentFormatter;
 

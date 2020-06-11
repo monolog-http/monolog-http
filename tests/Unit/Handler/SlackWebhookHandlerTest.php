@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Test\Unit\Handler;
+namespace MonologHttp\Tests\Unit\Handler;
 
 use GuzzleHttp\Psr7\Request;
 use Monolog\Formatter\LineFormatter;
@@ -15,7 +15,7 @@ use Psr\Http\Message\RequestInterface;
 use MonologHttp\Formatter\SlackFormatterInterface;
 use MonologHttp\Formatter\SlackShortAttachmentFormatter;
 use MonologHttp\Handler\SlackWebhookHandler;
-use MonologHttp\Test\Unit\TestCase;
+use MonologHttp\Tests\Unit\TestCase;
 
 final class SlackWebhookHandlerTest extends TestCase
 {
