@@ -30,6 +30,7 @@
         "psr/http-message": "^1.0.1"
     },
     "require-dev": {
+        "guzzlehttp/psr7": "dev-master",
         "phpstan/phpstan": "~0.12.29",
         "phpstan/phpstan-phpunit": "~0.12.11",
         "phpunit/phpunit": "~8.5.5 || ~9.2.2",
