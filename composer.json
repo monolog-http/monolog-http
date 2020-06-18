@@ -30,6 +30,7 @@
         "monolog/monolog": "^2.0"
     },
     "require-dev": {
+        "guzzlehttp/psr7": "dev-master",
         "phpstan/phpstan": "~0.12.28",
         "phpunit/phpunit": "^8.5 || ^9.1",
         "squizlabs/php_codesniffer": "^3.5"
