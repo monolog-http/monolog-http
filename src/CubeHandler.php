@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MonologHttp;
 
 use Monolog\Logger;
-use Monolog\Utils;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -55,8 +54,12 @@ final class CubeHandler extends AbstractHttpClientHandler
         $data['data'] = $record['context'];
         $data['data']['level'] = $record['level'];
 
-        $json = Utils::jsonEncode($data);
+        $json = \json_encode($data);
+        if (\JSON_ERROR_NONE !== \json_last_error()) {
+            throw new \InvalidArgumentException('Encoding json failed with reason: ' . \json_last_error_msg());
+        }
 
+        /** @var string $json */
         $request = $this->requestFactory->createRequest('POST', $this->uri);
         $request->getBody()->write($json);
         $request->getBody()->rewind();
