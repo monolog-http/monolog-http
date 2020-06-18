@@ -25,7 +25,7 @@ final class CubeHandlerTest extends TestCase
      */
     private $logger;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->httpClient = $this->createMock(ClientInterface::class);
@@ -42,7 +42,9 @@ final class CubeHandlerTest extends TestCase
             ->method('sendRequest')
             ->with($this->callback(function (RequestInterface $request): bool {
                 $this->assertSame('POST', $request->getMethod());
-                $this->assertSame('body', $request->getBody()->__toString());
+                $body = \json_decode($request->getBody()->__toString(), true);
+                $this->assertSame('test', $body['type']);
+                $this->assertSame(500, $body['data']['level']);
                 return true;
             }));
 
