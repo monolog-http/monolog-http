@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests;
 
+use GuzzleHttp\Psr7\HttpFactory;
+use Monolog\Logger;
 use MonologHttp\CubeHandler;
-use MonologHttp\TelegramHandler;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\StreamInterface;
+use Psr\Log\LogLevel;
 
 final class CubeHandlerTest extends TestCase
 {
@@ -20,11 +20,17 @@ final class CubeHandlerTest extends TestCase
      */
     private $httpClient;
 
+    /**
+     * @var Logger
+     */
+    private $logger;
+
     public function setUp(): void
     {
         parent::setUp();
         $this->httpClient = $this->createMock(ClientInterface::class);
-        $this->handler = new CubeHandler($httpClient, )
+        $this->logger = new Logger('test');
+        $this->logger->pushHandler(new CubeHandler($this->httpClient, new HttpFactory(), 'www.mydomain.com'));
     }
 
     /**
@@ -32,38 +38,18 @@ final class CubeHandlerTest extends TestCase
      */
     public function createRequest(): void
     {
+        $this->httpClient->expects($this->once())
+            ->method('sendRequest')
+            ->with($this->callback(function (RequestInterface $request): bool {
+                $this->assertSame('POST', $request->getMethod());
+                $this->assertSame('body', $request->getBody()->__toString());
+                return true;
+            }));
 
-        /** @var MockObject $mockRequestFactory */
-        $mockRequestFactory = $this->createMock(RequestFactoryInterface::class);
-        $mockBody = $this->createMock(StreamInterface::class);
-        $mockBody->expects($this->once())
-            ->method('write')
-            ->with('{"chat_id":1234,"text":"This is an error message"}');
-        $mockBody->expects($this->once())->method('rewind');
-        $mockRequest = $this->createMock(RequestInterface::class);
-        $mockRequest->expects($this->exactly(2))->method('getBody')->willReturn($mockBody);
-        $mockRequestFactory->expects($this->once())
-            ->method('createRequest')
-            ->with('POST', 'https://api.telegram.org/botTelegramApiKey/sendMessage')
-            ->willReturn($mockRequest);
-        $mockRequest->expects($this->once())
-            ->method('withHeader')
-            ->with('Content-Type', ['application/json'])
-            ->willReturn($mockRequest);
-
-        // @note workaround for the phpstan multiple types issue https://github.com/phpstan/phpstan-phpunit/issues/58
-        /** @var RequestFactoryInterface $requestFactory */
-        $requestFactory = $mockRequestFactory;
-        /** @var ClientInterface $client */
-        $client = $mockClient;
-
-        $telegramHandler = new TelegramHandler(
-            $client, $requestFactory, 'TelegramApiKey', 1234
-        );
-        $actualRequest = $telegramHandler->createRequest(
-            ['formatted' => 'This is an error message']
-        );
-
-        $this->assertInstanceOf(RequestInterface::class, $actualRequest);
+        $this->logger->log(LogLevel::CRITICAL, 'This is an error message', [
+            'ctx1' => 'val1',
+            'ctx2' => 'val2',
+            'ctx3' => ['val3'],
+        ]);
     }
 }

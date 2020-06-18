@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
-<ruleset name="monolog-http">
+<ruleset name="monolog-http"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd"
+>
     <description>The coding standard of monolog-http package</description>
     <arg value="p" />
 
@@ -10,5 +13,5 @@
     <arg value="s" />
 
     <rule ref="PSR12" />
-    <rule ref="PEAR.WhiteSpace.ObjectOperatorIndent"/>
+    <rule ref="PEAR.WhiteSpace.ObjectOperatorIndent" />
 </ruleset>
