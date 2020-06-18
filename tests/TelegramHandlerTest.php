@@ -46,7 +46,10 @@ class TelegramHandlerTest extends TestCase
         $client = $mockClient;
 
         $telegramHandler = new TelegramHandler(
-            $client, $requestFactory, 'TelegramApiKey', 1234
+            $client,
+            $requestFactory,
+            'TelegramApiKey',
+            1234
         );
         $actualRequest = $telegramHandler->createRequest(
             ['formatted' => 'This is an error message']
