@@ -40,10 +40,10 @@ abstract class AbstractHttpClientHandler extends AbstractProcessingHandler
     /**
      * Writes the record down to the log of the implementing handler
      */
-    protected function write(array $record): void
+    final protected function write(array $record): void
     {
         $this->client->sendRequest($this->createRequest($record));
     }
 
-    abstract public function createRequest(array $record): RequestInterface;
+    abstract protected function createRequest(array $record): RequestInterface;
 }

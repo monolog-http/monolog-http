@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace MonologHttp;
 
+use InvalidArgumentException;
 use Monolog\Logger;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
-use InvalidArgumentException;
 
 /**
  * Logs to Telegram.
@@ -29,19 +29,19 @@ final class TelegramHandler extends AbstractHttpClientHandler
 
     /**
      * @param int|string $chatId
-     * @param int|string $level
+     * @param int|string $level  The minimum logging level at which this handler will be triggered
      */
     public function __construct(
-        string $apiKey,
-        $chatId,
         ClientInterface $client,
         RequestFactoryInterface $requestFactory,
+        string $apiKey,
+        $chatId,
         $level = Logger::ERROR,
         bool $bubble = true
     ) {
+        parent::__construct($client, $requestFactory, $level, $bubble);
         $this->apiKey = $apiKey;
         $this->chatId = $chatId;
-        parent::__construct($client, $requestFactory, $level, $bubble);
     }
 
     /**
@@ -52,17 +52,17 @@ final class TelegramHandler extends AbstractHttpClientHandler
     {
         $uri = \sprintf('%s%s%s', self::TELEGRAM_API, $this->apiKey, '/sendMessage');
         $request = $this->requestFactory->createRequest('POST', $uri)->withHeader('Content-Type', ['application/json']);
-        $body = [
+
+        $jsonBody = \json_encode([
             'chat_id' => $this->chatId,
             'text' => $record['formatted'],
-        ];
+        ]);
 
-        /** @var string $jsonBody */
-        $jsonBody = \json_encode($body);
         if (\JSON_ERROR_NONE !== \json_last_error()) {
             throw new InvalidArgumentException(\json_last_error_msg());
         }
 
+        /** @var string $jsonBody */
         $request->getBody()->write($jsonBody);
         $request->getBody()->rewind();
 
