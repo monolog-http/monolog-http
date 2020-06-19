@@ -5,33 +5,23 @@ declare(strict_types=1);
 namespace MonologHttp;
 
 use Monolog\Formatter\FormatterInterface;
-use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
 use MonologHttp\Formatter\SlackFormatterInterface;
 use MonologHttp\Formatter\SlackLineFormatter;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * Sends notifications through a Slack Webhook.
  */
-final class SlackWebhookHandler extends AbstractProcessingHandler
+final class SlackWebhookHandler extends AbstractHttpClientHandler
 {
-    /**
-     * @var ClientInterface
-     */
-    private $client;
-
     /**
      * @var string
      */
     private $webhook;
-
-    /**
-     * @var RequestFactoryInterface
-     */
-    private $requestFactory;
 
     /**
      * @param string $webhook Slack Webhook string
@@ -45,10 +35,7 @@ final class SlackWebhookHandler extends AbstractProcessingHandler
         $level = Logger::ERROR,
         bool $bubble = true
     ) {
-        parent::__construct($level, $bubble);
-
-        $this->client = $client;
-        $this->requestFactory = $requestFactory;
+        parent::__construct($client, $requestFactory, $level, $bubble);
         $this->webhook = $webhook;
     }
 
@@ -64,19 +51,21 @@ final class SlackWebhookHandler extends AbstractProcessingHandler
         return parent::setFormatter($formatter);
     }
 
-    protected function write(array $record): void
+    protected function createRequest(array $record): RequestInterface
     {
         $body = \json_encode($record['formatted']);
-        if ($body === false) {
-            throw new \InvalidArgumentException('Could not format record to json');
+        if (\JSON_ERROR_NONE !== \json_last_error()) {
+            throw new \InvalidArgumentException('Could not format record to json: ' . \json_last_error_msg());
         };
 
         $request = $this->requestFactory->createRequest('POST', $this->webhook);
         $request = $request->withHeader('Content-Type', ['application/json']);
+
+        /** string $body */
         $request->getBody()->write($body);
         $request->getBody()->rewind();
 
-        $this->client->sendRequest($request);
+        return $request;
     }
 
     /**
