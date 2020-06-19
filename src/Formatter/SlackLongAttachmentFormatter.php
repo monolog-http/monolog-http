@@ -8,8 +8,6 @@ namespace MonologHttp\Formatter;
  * A Formatter that you can use in order to send to slack log message using the Attachment format.
  *
  * This Formatter will give the message of slack a Long format meaning that each key of the log context will be separate.
- *
- * @author George Mponos <gmponos@gmail.com>
  */
 final class SlackLongAttachmentFormatter extends AbstractSlackAttachmentFormatter
 {
@@ -19,6 +17,7 @@ final class SlackLongAttachmentFormatter extends AbstractSlackAttachmentFormatte
         $result = [];
         foreach ($record as $key => $value) {
             if (\is_array($value)) {
+                /** @var string $string */
                 $string = $this->toJson($value, true);
                 $value = $this->truncateStringIfNeeded($string);
 

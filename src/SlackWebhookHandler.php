@@ -8,15 +8,13 @@ use Monolog\Formatter\FormatterInterface;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
-use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestFactoryInterface;
 use MonologHttp\Formatter\SlackFormatterInterface;
 use MonologHttp\Formatter\SlackLineFormatter;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 
 /**
  * Sends notifications through a Slack Webhook.
- *
- * @author George Mponos <gmponos@gmail.com>
  */
 final class SlackWebhookHandler extends AbstractProcessingHandler
 {

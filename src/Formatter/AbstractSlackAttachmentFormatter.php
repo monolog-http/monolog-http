@@ -179,6 +179,7 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         }
 
         // the rest is json-serialized in some way
+        /** @var string $string */
         $string = $this->toJson($data, true);
         $value = \json_decode($string, true);
         return [$class => $value];
