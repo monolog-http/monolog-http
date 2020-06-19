@@ -5,6 +5,9 @@ vendor
 ### codesniffer
 phpcs.xml
 
+### php-cs-fixer
+.php_cs
+
 ### phpunit
 phpunit.xml
 .phpunit.result.cache
