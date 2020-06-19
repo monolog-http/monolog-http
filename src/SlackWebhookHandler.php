@@ -61,7 +61,7 @@ final class SlackWebhookHandler extends AbstractHttpClientHandler
         $request = $this->requestFactory->createRequest('POST', $this->webhook);
         $request = $request->withHeader('Content-Type', ['application/json']);
 
-        /** string $body */
+        /** @var string $body */
         $request->getBody()->write($body);
         $request->getBody()->rewind();
 
