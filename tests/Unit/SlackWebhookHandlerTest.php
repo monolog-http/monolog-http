@@ -9,6 +9,7 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\WhatFailureGroupHandler;
 use Monolog\Logger;
 use MonologHttp\Formatter\SlackFormatterInterface;
+use MonologHttp\Formatter\SlackLongAttachmentFormatter;
 use MonologHttp\Formatter\SlackShortAttachmentFormatter;
 use MonologHttp\SlackWebhookHandler;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -48,7 +49,11 @@ final class SlackWebhookHandlerTest extends TestCase
     {
         $formatter = new SlackShortAttachmentFormatter();
         $this->handler->setFormatter($formatter);
-        $this->assertAttributeSame($formatter, 'formatter', $this->handler);
+        $this->assertInstanceOf(SlackShortAttachmentFormatter::class, $this->handler->getFormatter());
+
+        $formatter = new SlackLongAttachmentFormatter();
+        $this->handler->setFormatter($formatter);
+        $this->assertInstanceOf(SlackLongAttachmentFormatter::class, $this->handler->getFormatter());
     }
 
     /**
