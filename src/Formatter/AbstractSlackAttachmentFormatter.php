@@ -90,6 +90,9 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         return $data;
     }
 
+    /**
+     * @return mixed
+     */
     protected function normalize($data, int $depth = 0)
     {
         if ($data === null || \is_scalar($data)) {
