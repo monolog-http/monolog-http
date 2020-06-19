@@ -90,12 +90,7 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         return $data;
     }
 
-    /**
-     * @param mixed $data
-     * @param int $depth
-     * @return mixed
-     */
-    protected function normalize($data, $depth = 0)
+    protected function normalize($data, int $depth = 0)
     {
         if ($data === null || \is_scalar($data)) {
             return $this->normalizeScalar($data);
@@ -181,7 +176,6 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
         }
 
         // the rest is json-serialized in some way
-        /** @var string $string */
         $string = $this->toJson($data, true);
         $value = \json_decode($string, true);
         return [$class => $value];
@@ -224,8 +218,8 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
     }
 
     /**
-     * @param mixed $data
-     * @return mixed
+     * @param int|float|string|bool|null $data
+     * @return int|float|string|bool|null
      */
     private function normalizeScalar($data)
     {
@@ -233,6 +227,7 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
             if (\is_infinite($data)) {
                 return ($data > 0 ? '' : '-') . 'INF';
             }
+
             if (\is_nan($data)) {
                 return 'NaN';
             }

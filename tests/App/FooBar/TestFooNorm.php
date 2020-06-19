@@ -6,5 +6,8 @@ namespace MonologHttp\Tests\App\FooBar;
 
 class TestFooNorm
 {
+    /**
+     * @var string
+     */
     public $foo = 'foo';
 }

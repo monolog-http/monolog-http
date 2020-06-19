@@ -7,3 +7,6 @@ parameters:
 
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
+
+    ignoreErrors:
+        - '#Unreachable statement - code above always terminates.#'

@@ -6,7 +6,7 @@ namespace MonologHttp\Tests\App\FooBar;
 
 class TestBarNorm
 {
-    public function __toString()
+    public function __toString(): string
     {
         return 'bar';
     }

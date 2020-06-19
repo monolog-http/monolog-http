@@ -10,21 +10,7 @@ use MonologHttp\Tests\Unit\TestCase;
 
 final class SlackLongAttachmentFormatterTest extends TestCase
 {
-    /**
-     * @var int
-     */
-    private $jsonFlags;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->jsonFlags = \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE;
-    }
-
-    /**
-     * @return array
-     */
-    public function dataGetAttachmentColor()
+    public function dataGetAttachmentColor(): array
     {
         return [
             [Logger::DEBUG, '#cccccc'],
@@ -41,10 +27,8 @@ final class SlackLongAttachmentFormatterTest extends TestCase
     /**
      * @test
      * @dataProvider dataGetAttachmentColor
-     * @param int $logLevel
-     * @param string $expectedColour
      */
-    public function getAttachmentColor($logLevel, $expectedColour): void
+    public function getAttachmentColor(int $logLevel, string $expectedColour): void
     {
         $formatter = new SlackLongAttachmentFormatter();
         $data = $formatter->format($this->getRecord($logLevel));
@@ -72,10 +56,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
         $this->assertSame('Monolog bot', $data['username']);
     }
 
-    /**
-     * @return array
-     */
-    public function dataGetEmojiProvider()
+    public function dataGetEmojiProvider(): array
     {
         return [
             [':loudspeaker:'],
@@ -92,9 +73,8 @@ final class SlackLongAttachmentFormatterTest extends TestCase
     /**
      * @test
      * @dataProvider dataGetEmojiProvider
-     * @param string $expected
      */
-    public function getEmojiIcon($expected): void
+    public function getEmojiIcon(string $expected): void
     {
         $data = $this->createFormatter(null, $expected)->format($this->getRecord(Logger::ALERT));
         $this->assertSame($expected, $data['icon_emoji']);
@@ -120,6 +100,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
         $attachment = $data['attachments'][0];
         $this->assertArrayHasKey('ts', $attachment);
         $this->assertInstanceOf(\DateTimeInterface::class, $record['datetime']);
+
         /** @var \DateTimeInterface $dt */
         $dt = $record['datetime'];
         $this->assertSame($dt->getTimestamp(), $attachment['ts']);
@@ -217,14 +198,11 @@ final class SlackLongAttachmentFormatterTest extends TestCase
         $this->assertArrayNotHasKey('channel', $data);
     }
 
-    /**
-     * @param string|null $username
-     * @param string $userIcon
-     * @param bool $includeContextAndExtra
-     * @return SlackLongAttachmentFormatter
-     */
-    private function createFormatter($username = null, string $userIcon = null, $includeContextAndExtra = true)
-    {
+    private function createFormatter(
+        string $username = null,
+        string $userIcon = null,
+        bool $includeContextAndExtra = true
+    ): SlackLongAttachmentFormatter {
         return new SlackLongAttachmentFormatter($username, $userIcon, $includeContextAndExtra);
     }
 }

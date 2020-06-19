@@ -19,7 +19,6 @@ final class SlackLongAttachmentFormatter extends AbstractSlackAttachmentFormatte
         $result = [];
         foreach ($record as $key => $value) {
             if (\is_array($value)) {
-                /** @var string $string */
                 $string = $this->toJson($value, true);
                 $value = $this->truncateStringIfNeeded($string);
 

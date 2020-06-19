@@ -66,9 +66,8 @@ final class SlackLineFormatterTest extends TestCase
     }
 
     /**
-     * @dataProvider correctEmojiProvider
-     *
      * @test
+     * @dataProvider correctEmojiProvider
      */
     public function correctlyParsesEmoji(string $emoji, string $expectedEmoji): void
     {
@@ -79,10 +78,7 @@ final class SlackLineFormatterTest extends TestCase
         $this->assertSame($expectedEmoji, $data['icon_emoji']);
     }
 
-    /**
-     * @return array
-     */
-    public function correctEmojiProvider()
+    public function correctEmojiProvider(): array
     {
         return [
             ['loudspeaker', ':loudspeaker:'],

@@ -6,9 +6,19 @@ namespace MonologHttp\Tests\App\FooBar;
 
 class TestStreamFoo
 {
+    /**
+     * @var string
+     */
     public $foo;
+
+    /**
+     * @var resource
+     */
     public $resource;
 
+    /**
+     * @param resource $resource
+     */
     public function __construct($resource)
     {
         $this->resource = $resource;

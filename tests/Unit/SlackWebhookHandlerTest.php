@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Tests\Unit\Handler;
+namespace MonologHttp\Tests\Unit;
 
 use GuzzleHttp\Psr7\Request;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\WhatFailureGroupHandler;
 use Monolog\Logger;
+use MonologHttp\Formatter\SlackFormatterInterface;
+use MonologHttp\Formatter\SlackShortAttachmentFormatter;
+use MonologHttp\SlackWebhookHandler;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
-use MonologHttp\Formatter\SlackFormatterInterface;
-use MonologHttp\Formatter\SlackShortAttachmentFormatter;
-use MonologHttp\SlackWebhookHandler;
-use MonologHttp\Tests\Unit\TestCase;
 
 final class SlackWebhookHandlerTest extends TestCase
 {
@@ -30,13 +29,10 @@ final class SlackWebhookHandlerTest extends TestCase
     private $handler;
 
     /**
-     * @var RequestFactoryInterface
+     * @var RequestFactoryInterface|MockObject
      */
     private $requestFactory;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         parent::setUp();

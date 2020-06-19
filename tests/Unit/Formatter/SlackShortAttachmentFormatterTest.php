@@ -21,7 +21,7 @@ final class SlackShortAttachmentFormatterTest extends TestCase
         $this->jsonFlags = \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE;
     }
 
-    public function dataGetAttachmentColorProvider()
+    public function dataGetAttachmentColorProvider(): array
     {
         return [
             [Logger::DEBUG, '#cccccc'],
@@ -86,9 +86,8 @@ final class SlackShortAttachmentFormatterTest extends TestCase
     /**
      * @test
      * @dataProvider dataGetEmojiProvider
-     * @param string $expected
      */
-    public function getEmojiIcon($expected): void
+    public function getEmojiIcon(string $expected): void
     {
         $data = $this->createFormatter(null, $expected)->format($this->getRecord(Logger::ALERT));
         $this->assertSame($expected, $data['icon_emoji']);
@@ -209,15 +208,11 @@ final class SlackShortAttachmentFormatterTest extends TestCase
         $this->assertSame($dt->getTimestamp(), $attachment['ts']);
     }
 
-    /**
-     * @param string $userIcon
-     * @return SlackShortAttachmentFormatter
-     */
     private function createFormatter(
         string $username = null,
         string $userIcon = null,
         bool $includeContextAndExtra = true
-    ) {
+    ): SlackShortAttachmentFormatter {
         return new SlackShortAttachmentFormatter($username, $userIcon, $includeContextAndExtra);
     }
 }

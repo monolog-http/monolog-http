@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase as PhpUnitTestCase;
 
 abstract class TestCase extends PhpUnitTestCase
 {
-    /**
-     * @return array Record
-     */
-    protected function getRecord(int $level = Logger::WARNING, string $message = 'test', array $context = [])
+    protected function getRecord(int $level = Logger::WARNING, string $message = 'test', array $context = []): array
     {
         return [
             'message' => $message,

@@ -6,10 +6,7 @@ namespace MonologHttp\Tests\App\FooBar;
 
 class TestJsonSerializableNorm implements \JsonSerializable
 {
-    /**
-     * @return array
-     */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'foo' => 'bar',
