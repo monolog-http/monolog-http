@@ -7,8 +7,11 @@ namespace MonologHttp\Sendgrid;
 use Monolog\DateTimeImmutable;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\HtmlFormatter;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
 use MonologHttp\AbstractHttpClientHandler;
+use MonologHttp\Sendgrid\Formatter\SendGridFormatterInterface;
+use MonologHttp\Slack\Formatter\SlackFormatterInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -94,6 +97,18 @@ final class SendGridHandler extends AbstractHttpClientHandler
     private function isHtmlBody(string $body): bool
     {
         return $body !== \strip_tags($body);
+    }
+
+    /**
+     * @throws \InvalidArgumentException
+     */
+    public function setFormatter(FormatterInterface $formatter): HandlerInterface
+    {
+        if (!$formatter instanceof SendGridFormatterInterface) {
+            throw new \InvalidArgumentException(\sprintf('Expected an instance of %s', SendGridFormatterInterface::class));
+        }
+
+        return parent::setFormatter($formatter);
     }
 
     /**
