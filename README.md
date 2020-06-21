@@ -3,7 +3,12 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status](https://travis-ci.com/monolog-http/monolog-http.svg?branch=master)](https://travis-ci.com/monolog-http/monolog-http)
 
-A collection of monolog handlers using that use PSR-18 http client in order to send logs to various systems.
+A collection of monolog handlers that use [PSR-18](https://www.php-fig.org/psr/psr-18/) HTTP Client in order to send logs to various systems.
+
+
+## Why
+
+By leveraging the PSR-18 the developers are now able to choose the transport layer they want and customize it according to their needs (see [here](https://github.com/Seldaek/monolog/pull/1239)).
 
 ## Install
 
@@ -20,7 +25,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## Testing
 
 ``` bash
-$ make tests
+$ make phpunit
 ```
 
 ## Contributing
