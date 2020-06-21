@@ -1,9 +1,7 @@
 # monolog-http
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Total Downloads][ico-downloads]][link-downloads]
+[![Build Status](https://travis-ci.com/monolog-http/monolog-http.svg?branch=master)](https://travis-ci.com/monolog-http/monolog-http)
 
 A collection of monolog handlers using that use PSR-18 http client in order to send logs to various systems.
 
@@ -35,18 +33,12 @@ Please check our [issue](https://github.com/monolog-http/monolog-http/issues) if
 
 - [George Mponos](https://github.com/gmponos)
 - [Savvas Alexandrou](https://github.com/savvasal)
-- [All Contributors][link-contributors]
+- [All Contributors](../../contributors)
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/monolog-http/monolog-http.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/monolog-http/monolog-http/master.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/monolog-http/monolog-http.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/monolog-http/monolog-http
-[link-travis]: https://travis-ci.org/monolog-http/monolog-http
 [link-downloads]: https://packagist.org/packages/monolog-http/monolog-http
-[link-contributors]: ../../contributors
