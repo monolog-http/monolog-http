@@ -92,7 +92,7 @@ final class SendGridHandler extends AbstractHttpClientHandler
 
     private function isHtmlBody(string $body): bool
     {
-        return \substr($body, 0, 1) === '<';
+        return $body !== \strip_tags($body);
     }
 
     /**
