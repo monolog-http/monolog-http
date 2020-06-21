@@ -29,7 +29,7 @@ final class TelegramHandler extends AbstractHttpClientHandler
 
     /**
      * @param int|string $chatId
-     * @param int|string $level  The minimum logging level at which this handler will be triggered
+     * @param int|string $level The minimum logging level at which this handler will be triggered
      */
     public function __construct(
         ClientInterface $client,
