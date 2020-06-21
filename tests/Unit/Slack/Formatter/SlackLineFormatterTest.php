@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Tests\Unit\Formatter;
+namespace MonologHttp\Tests\Unit\Slack\Formatter;
 
 use Monolog\Logger;
-use MonologHttp\Formatter\SlackLineFormatter;
+use MonologHttp\Slack\Formatter\SlackLineFormatter;
 use MonologHttp\Tests\Unit\TestCase;
 
 final class SlackLineFormatterTest extends TestCase

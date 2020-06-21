@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Tests\Unit\Formatter;
+namespace MonologHttp\Tests\Unit\Slack\Formatter;
 
 use Monolog\Logger;
-use MonologHttp\Formatter\SlackLongAttachmentFormatter;
+use MonologHttp\Slack\Formatter\SlackLongAttachmentFormatter;
 use MonologHttp\Tests\Unit\TestCase;
 
 final class SlackLongAttachmentFormatterTest extends TestCase

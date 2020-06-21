@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Formatter;
+namespace MonologHttp\Slack\Formatter;
 
 /**
  * A Formatter that you can use in order to send to slack log message using the Attachment format.

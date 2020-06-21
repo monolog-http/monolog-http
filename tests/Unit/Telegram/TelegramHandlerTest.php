@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Tests;
+namespace MonologHttp\Tests\Unit\Telegram;
 
-use MonologHttp\TelegramHandler;
+use MonologHttp\Telegram\TelegramHandler;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
@@ -12,7 +12,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 
-class TelegramHandlerTest extends TestCase
+final class TelegramHandlerTest extends TestCase
 {
     /**
      * @test

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp;
+namespace MonologHttp\Telegram;
 
-use InvalidArgumentException;
 use Monolog\Logger;
+use MonologHttp\AbstractHttpClientHandler;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -46,6 +46,7 @@ final class TelegramHandler extends AbstractHttpClientHandler
 
     /**
      * Create request to @link https://api.telegram.org/bot on SendMessage action
+     *
      * @see https://core.telegram.org/bots/api#sendmessage
      */
     public function createRequest(array $record): RequestInterface

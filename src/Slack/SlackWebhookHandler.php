@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp;
+namespace MonologHttp\Slack;
 
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
-use MonologHttp\Formatter\SlackFormatterInterface;
-use MonologHttp\Formatter\SlackLineFormatter;
+use MonologHttp\AbstractHttpClientHandler;
+use MonologHttp\Slack\Formatter\SlackFormatterInterface;
+use MonologHttp\Slack\Formatter\SlackLineFormatter;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;

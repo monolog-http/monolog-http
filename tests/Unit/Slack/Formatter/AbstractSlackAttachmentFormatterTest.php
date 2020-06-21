@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Tests\Unit\Formatter;
+namespace MonologHttp\Tests\Unit\Slack\Formatter;
 
 use Monolog\Logger;
 use MonologHttp\Tests\App\FooBar\TestBarNorm;

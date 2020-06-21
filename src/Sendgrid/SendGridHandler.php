@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp;
+namespace MonologHttp\Sendgrid;
 
 use Monolog\DateTimeImmutable;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\HtmlFormatter;
 use Monolog\Logger;
+use MonologHttp\AbstractHttpClientHandler;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;

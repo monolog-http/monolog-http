@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Tests\Unit;
+namespace MonologHttp\Tests\Unit\Slack;
 
 use GuzzleHttp\Psr7\Request;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\WhatFailureGroupHandler;
 use Monolog\Logger;
-use MonologHttp\Formatter\SlackFormatterInterface;
-use MonologHttp\Formatter\SlackLongAttachmentFormatter;
-use MonologHttp\Formatter\SlackShortAttachmentFormatter;
-use MonologHttp\SlackWebhookHandler;
+use MonologHttp\Slack\Formatter\SlackFormatterInterface;
+use MonologHttp\Slack\Formatter\SlackLongAttachmentFormatter;
+use MonologHttp\Slack\Formatter\SlackShortAttachmentFormatter;
+use MonologHttp\Slack\SlackWebhookHandler;
+use MonologHttp\Tests\Unit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Tests;
+namespace MonologHttp\Tests\Unit\Sendgrid;
 
 use GuzzleHttp\Psr7\HttpFactory;
 use Monolog\Logger;
-use MonologHttp\SendGridHandler;
+use MonologHttp\Sendgrid\SendGridHandler;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;

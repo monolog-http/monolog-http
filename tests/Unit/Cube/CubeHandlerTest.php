@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Tests;
+namespace MonologHttp\Tests\Unit\Cube;
 
 use GuzzleHttp\Psr7\HttpFactory;
 use Monolog\Logger;
-use MonologHttp\CubeHandler;
+use MonologHttp\Cube\CubeHandler;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;

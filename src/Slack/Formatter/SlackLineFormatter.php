@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Formatter;
+namespace MonologHttp\Slack\Formatter;
 
 use Monolog\Formatter\LineFormatter;
 use Monolog\Formatter\NormalizerFormatter;

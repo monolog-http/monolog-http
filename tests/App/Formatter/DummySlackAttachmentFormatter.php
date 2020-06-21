@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests\App\Formatter;
 
-use MonologHttp\Formatter\AbstractSlackAttachmentFormatter;
+use MonologHttp\Slack\Formatter\AbstractSlackAttachmentFormatter;
 
 final class DummySlackAttachmentFormatter extends AbstractSlackAttachmentFormatter
 {
