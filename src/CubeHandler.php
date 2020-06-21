@@ -42,7 +42,6 @@ final class CubeHandler extends AbstractHttpClientHandler
         $date = $record['datetime'];
 
         $data = ['time' => $date->format('Y-m-d\TH:i:s.uO')];
-        unset($record['datetime']);
 
         if (isset($record['context']['type'])) {
             $data['type'] = $record['context']['type'];
