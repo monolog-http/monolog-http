@@ -64,7 +64,7 @@ final class GitlabFormatter implements FormatterInterface
             $data['monitoring_tool'] = $this->monitoringTool;
         }
 
-        if (count($this->hosts) > 0) {
+        if (\count($this->hosts) > 0) {
             $data['hosts'] = $this->hosts;
         }
 

@@ -51,7 +51,7 @@ final class GitlabHandlerTest extends TestCase
             ->with($this->callback(function (RequestInterface $request): bool {
                 $this->assertSame('POST', $request->getMethod());
                 $this->assertSame('www.gitlab.com', $request->getUri()->__toString());
-                $data = json_decode($request->getBody()->__toString(), true);
+                $data = \json_decode($request->getBody()->__toString(), true);
                 $this->assertSame('This is an error message', $data['title']);
                 $this->assertSame('critical', $data['level']);
                 return true;
