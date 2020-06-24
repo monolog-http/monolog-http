@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace MonologHttp\Sendgrid;
 
-use Monolog\DateTimeImmutable;
 use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\HtmlFormatter;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
 use MonologHttp\AbstractHttpClientHandler;
+use MonologHttp\Sendgrid\Formatter\SendGridFormatterInterface;
+use MonologHttp\Sendgrid\Formatter\SendgridHtmlFormatter;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -36,13 +37,13 @@ final class SendGridHandler extends AbstractHttpClientHandler
     private $to;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $subject;
 
     /**
      * @param string[] $to
-     * @param int $level The minimum logging level at which this handler will be triggered
+     * @param int|string $level The minimum logging level at which this handler will be triggered
      */
     public function __construct(
         ClientInterface $client,
@@ -51,8 +52,8 @@ final class SendGridHandler extends AbstractHttpClientHandler
         string $apiKey,
         string $from,
         array $to,
-        string $subject,
-        int $level = Logger::ERROR,
+        ?string $subject = null,
+        $level = Logger::ERROR,
         bool $bubble = true
     ) {
         parent::__construct($client, $requestFactory, $level, $bubble);
@@ -65,42 +66,31 @@ final class SendGridHandler extends AbstractHttpClientHandler
 
     protected function createRequest(array $record): RequestInterface
     {
-        if ($this->isHtmlBody($record['formatted'])) {
-            $message['html'] = $record['formatted'];
-        } else {
-            $message['text'] = $record['formatted'];
-        }
-
-        $message['api_user'] = $this->apiUser;
-        $message['api_key'] = $this->apiKey;
-        $message['from'] = $this->from;
-        foreach ($this->to as $recipient) {
-            $message['to[]'] = $recipient;
-        }
-        $message['subject'] = $this->subject;
-
-        /** @var DateTimeImmutable $date */
-        $date = $record['datetime'];
-        $message['date'] = $date->format('r');
-
         $request = $this->requestFactory->createRequest('POST', 'https://api.sendgrid.com/api/mail.send.json');
         $body = $request->getBody();
-        $body->write(\http_build_query($message));
+        $body->write(\http_build_query($record['formatted']));
         $body->rewind();
 
         return $request;
     }
 
-    private function isHtmlBody(string $body): bool
+    /**
+     * @throws \InvalidArgumentException
+     */
+    public function setFormatter(FormatterInterface $formatter): HandlerInterface
     {
-        return $body !== \strip_tags($body);
+        if (!$formatter instanceof SendGridFormatterInterface) {
+            throw new \InvalidArgumentException(\sprintf('Expected an instance of %s', SendGridFormatterInterface::class));
+        }
+
+        return parent::setFormatter($formatter);
     }
 
     /**
-     * @return HtmlFormatter
+     * @return SendgridHtmlFormatter
      */
     protected function getDefaultFormatter(): FormatterInterface
     {
-        return new HtmlFormatter();
+        return new SendgridHtmlFormatter($this->apiUser, $this->apiKey, $this->from, $this->to, $this->subject);
     }
 }
