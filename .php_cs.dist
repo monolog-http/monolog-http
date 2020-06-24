@@ -13,6 +13,7 @@ return PhpCsFixer\Config::create()
         'dir_constant' => true,
         'final_static_access' => true,
         'function_to_constant' => true,
+        'is_null' => ['use_yoda_style' => false],
         'native_constant_invocation' => true,
         'native_function_invocation' => [
             'include' => [
