@@ -52,7 +52,7 @@ final class FlowdockHandler extends AbstractHttpClientHandler
             throw new \InvalidArgumentException('Could not format record to json: ' . \json_last_error_msg());
         }
 
-        $url = \is_null($this->flowToken) ?
+        $url = (null === $this->flowToken) ?
             $this->uri :
             \sprintf('%s?flow_token=%s', $this->uri, $this->flowToken);
 

@@ -9,7 +9,6 @@ use MonologHttp\Tests\Unit\TestCase;
 
 final class FlowdockMessageFormatterTest extends TestCase
 {
-
     /**
      * @test
      */
