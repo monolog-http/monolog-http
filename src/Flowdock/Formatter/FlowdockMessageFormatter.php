@@ -6,22 +6,6 @@ namespace MonologHttp\Flowdock\Formatter;
 
 final class FlowdockMessageFormatter implements FlowdockFormatterInterface
 {
-    /**
-     * @var string
-     */
-    private $eventType;
-
-    /**
-     * @var int|null
-     */
-    private $flowId;
-
-    public function __construct(string $eventType = 'message', int $flowId = null)
-    {
-        $this->eventType = $eventType;
-        $this->flowId = $flowId;
-    }
-
     /*
      * {@inheritdoc}
      */
@@ -29,18 +13,13 @@ final class FlowdockMessageFormatter implements FlowdockFormatterInterface
     {
         $data = [];
 
-        if (!\is_null($this->flowId)) {
-            $data['flow'] = $this->flowId;
-        }
-
-        $data['event'] = $this->eventType;
+        $data['event'] = 'message';
 
         $data['content'] = $record['message'];
 
         $tags = [
             '#logs',
-            '#' . \strtolower($record['level_name']),
-            '#' . $record['channel'],
+            '#' . \strtolower($record['level_name'])
         ];
         foreach ($record['extra'] as $value) {
             $tags[] = '#' . $value;

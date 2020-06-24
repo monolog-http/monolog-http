@@ -15,21 +15,19 @@ final class FlowdockMessageFormatterTest extends TestCase
      */
     public function formatTheRecord(): void
     {
-        $flowdockMessageFormatter = new FlowdockMessageFormatter('message', 123);
+        $flowdockMessageFormatter = new FlowdockMessageFormatter();
         $record = [
             'message' => 'This is an error message',
-            'channel' => 'firefighters',
             'level_name' => 'critical',
             'extra' => [
                 'tech',
             ],
         ];
         $expectedData = [
-            'flow' => 123,
             'event' => 'message',
             'content' => 'This is an error message',
             'tags' => [
-                '#logs', '#critical', '#firefighters', '#tech',
+                '#logs', '#critical', '#tech',
             ]
         ];
         $data = $flowdockMessageFormatter->format($record);
