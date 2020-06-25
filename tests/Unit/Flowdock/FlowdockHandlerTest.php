@@ -31,7 +31,7 @@ final class FlowdockHandlerTest extends TestCase
         parent::setUp();
         $this->client = $this->createMock(ClientInterface::class);
         $uri = new Uri('https://api.example.com/messages');
-        $this->handler = new FlowdockHandler($this->client, new HttpFactory(), $uri);
+        $this->handler = new FlowdockHandler($this->client, new HttpFactory(), $uri, 'asecretflowtoken');
     }
 
     /**

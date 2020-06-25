@@ -6,12 +6,24 @@ namespace MonologHttp\Flowdock\Formatter;
 
 final class FlowdockMessageFormatter implements FlowdockFormatterInterface
 {
+    /**
+     * @var string
+     */
+    private $flowToken;
+
+    public function __construct(string $flowToken)
+    {
+        $this->flowToken = $flowToken;
+    }
+
     /*
      * {@inheritdoc}
      */
     public function format(array $record)
     {
         $data = [];
+
+        $data['flow_token'] = $this->flowToken;
 
         $data['event'] = 'message';
 

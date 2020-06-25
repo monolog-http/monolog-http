@@ -24,7 +24,7 @@ final class FlowdockHandler extends AbstractHttpClientHandler
     private $uri;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $flowToken;
 
@@ -36,7 +36,7 @@ final class FlowdockHandler extends AbstractHttpClientHandler
         ClientInterface $client,
         RequestFactoryInterface $requestFactory,
         $uri,
-        ?string $flowToken = null,
+        string $flowToken,
         $level = Logger::ERROR,
         bool $bubble = true
     ) {
@@ -52,11 +52,7 @@ final class FlowdockHandler extends AbstractHttpClientHandler
             throw new \InvalidArgumentException('Could not format record to json: ' . \json_last_error_msg());
         }
 
-        $url = (null === $this->flowToken) ?
-            $this->uri :
-            \sprintf('%s?flow_token=%s', $this->uri, $this->flowToken);
-
-        $request = $this->requestFactory->createRequest('POST', $url)
+        $request = $this->requestFactory->createRequest('POST', $this->uri)
             ->withHeader('Content-Type', ['application/json']);
 
         /** @var string $body */
@@ -85,6 +81,6 @@ final class FlowdockHandler extends AbstractHttpClientHandler
      */
     protected function getDefaultFormatter(): FormatterInterface
     {
-        return new FlowdockMessageFormatter();
+        return new FlowdockMessageFormatter($this->flowToken);
     }
 }

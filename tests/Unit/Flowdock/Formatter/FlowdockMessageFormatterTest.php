@@ -14,7 +14,7 @@ final class FlowdockMessageFormatterTest extends TestCase
      */
     public function formatTheRecord(): void
     {
-        $flowdockMessageFormatter = new FlowdockMessageFormatter();
+        $flowdockMessageFormatter = new FlowdockMessageFormatter('asecretflowtoken');
         $record = [
             'message' => 'This is an error message',
             'level_name' => 'critical',
@@ -23,6 +23,7 @@ final class FlowdockMessageFormatterTest extends TestCase
             ],
         ];
         $expectedData = [
+            'flow_token' => 'asecretflowtoken',
             'event' => 'message',
             'content' => 'This is an error message',
             'tags' => [
