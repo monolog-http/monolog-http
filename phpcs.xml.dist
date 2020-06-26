@@ -21,6 +21,8 @@
     <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
     <!-- Forbid useless empty method overrides -->
     <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
+    <!-- Forbid Yoda -->
+    <rule ref="Generic.ControlStructures.DisallowYodaConditions"/>
     <!-- Forbid inline HTML in PHP code -->
     <rule ref="Generic.Files.InlineHTML"/>
     <!-- Forbid PHP 4 constructors -->
