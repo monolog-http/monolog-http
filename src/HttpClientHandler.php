@@ -25,6 +25,9 @@ final class HttpClientHandler extends AbstractHttpClientHandler
      */
     private $method;
 
+    /**
+     * @param string|UriInterface $uri
+     */
     public function __construct(
         ClientInterface $client,
         RequestFactoryInterface $requestFactory,
