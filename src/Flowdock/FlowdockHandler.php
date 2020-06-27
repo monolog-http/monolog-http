@@ -36,7 +36,7 @@ final class FlowdockHandler extends AbstractHttpClientHandler
         ClientInterface $client,
         RequestFactoryInterface $requestFactory,
         $uri,
-        ?string $flowToken,
+        ?string $flowToken = null,
         $level = Logger::ERROR,
         bool $bubble = true
     ) {

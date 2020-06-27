@@ -11,7 +11,7 @@ final class FlowdockMessageFormatter implements FlowdockFormatterInterface
      */
     private $flowToken;
 
-    public function __construct(?string $flowToken)
+    public function __construct(?string $flowToken = null)
     {
         $this->flowToken = $flowToken;
     }
