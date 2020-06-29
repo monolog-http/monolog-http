@@ -7,11 +7,11 @@ namespace MonologHttp\Flowdock\Formatter;
 final class FlowdockMessageFormatter implements FlowdockFormatterInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $flowToken;
 
-    public function __construct(string $flowToken)
+    public function __construct(?string $flowToken = null)
     {
         $this->flowToken = $flowToken;
     }
@@ -23,7 +23,9 @@ final class FlowdockMessageFormatter implements FlowdockFormatterInterface
     {
         $data = [];
 
-        $data['flow_token'] = $this->flowToken;
+        if ($this->flowToken !== null) {
+            $data['flow_token'] = $this->flowToken;
+        }
 
         $data['event'] = 'message';
 
