@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace MonologHttp;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Pool;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use Psr\Http\Client\ClientInterface;
@@ -34,6 +36,21 @@ abstract class AbstractHttpClientHandler extends AbstractProcessingHandler
         parent::__construct($level, $bubble);
         $this->client = $client;
         $this->requestFactory = $requestFactory;
+    }
+
+    public function handleBatch(array $records): void
+    {
+        if (!$this->client instanceof Client) {
+            parent::handleBatch($records);
+            return;
+        }
+
+        $requests = [];
+        foreach ($records as $record){
+            $requests[] = $this->createRequest($record);
+        }
+
+        Pool::batch($this->client, $requests);
     }
 
     /**
