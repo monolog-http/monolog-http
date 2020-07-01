@@ -31,10 +31,11 @@
     },
     "require-dev": {
         "guzzlehttp/psr7": "dev-master",
-        "phpstan/phpstan": "~0.12.29",
+        "phpstan/phpstan": "~0.12.31",
         "phpstan/phpstan-phpunit": "~0.12.11",
-        "phpunit/phpunit": "~8.5.6 || ~9.2.2",
-        "squizlabs/php_codesniffer": "~3.5.5"
+        "phpunit/phpunit": "~8.5.8 || ~9.2.2",
+        "squizlabs/php_codesniffer": "~3.5.5",
+        "swiftmailer/swiftmailer": "^6.2"
     },
     "config": {
         "sort-packages": true
