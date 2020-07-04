@@ -58,6 +58,7 @@ final class IFTTTHandler extends AbstractHttpClientHandler
 
         $body = $request->getBody();
 
+        /** @var string $content */
         $body->write($content);
         $body->rewind();
 
