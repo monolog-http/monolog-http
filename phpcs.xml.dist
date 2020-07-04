@@ -93,8 +93,14 @@
     <rule ref="Squiz.PHP.LowercasePHPFunctions" />
     <!-- Forbid dead code -->
     <rule ref="Squiz.PHP.NonExecutableCode" />
+
     <!-- Forbid `$this` inside static function -->
     <rule ref="Squiz.Scope.StaticThisUsage" />
+
+    <!-- Disallow double quote usage -->
+    <rule ref="Squiz.Strings.DoubleQuoteUsage">
+        <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
+    </rule>
     <!-- Forbid blank line after function opening brace -->
     <rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace"/>
     <!-- Require 1 line before and after function, except at the top and bottom -->
