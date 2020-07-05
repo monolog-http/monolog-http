@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Telegram;
 
+use Monolog\Formatter\LineFormatter;
 use Monolog\Logger;
 use MonologHttp\AbstractHttpClientHandler;
 use Psr\Http\Client\ClientInterface;
@@ -15,8 +16,6 @@ use Psr\Http\Message\RequestInterface;
  */
 final class TelegramHandler extends AbstractHttpClientHandler
 {
-    private const TELEGRAM_API = 'https://api.telegram.org/bot';
-
     /**
      * @var string
      */
@@ -51,10 +50,7 @@ final class TelegramHandler extends AbstractHttpClientHandler
      */
     public function createRequest(array $record): RequestInterface
     {
-        $uri = \sprintf('%s%s%s', self::TELEGRAM_API, $this->apiKey, '/sendMessage');
-        $request = $this->requestFactory->createRequest('POST', $uri)->withHeader('Content-Type', ['application/json']);
-
-        $jsonBody = \json_encode([
+        $content = \json_encode([
             'chat_id' => $this->chatId,
             'text' => $record['formatted'],
         ]);
@@ -63,8 +59,12 @@ final class TelegramHandler extends AbstractHttpClientHandler
             throw new \InvalidArgumentException('Encoding json failed with reason: ' . \json_last_error_msg());
         }
 
-        /** @var string $jsonBody */
-        $request->getBody()->write($jsonBody);
+        $uri = \sprintf('%s%s%s', 'https://api.telegram.org/bot', $this->apiKey, '/sendMessage');
+        $request = $this->requestFactory->createRequest('POST', $uri)
+            ->withHeader('Content-Type', 'application/json');
+
+        /** @var string $content */
+        $request->getBody()->write($content);
         $request->getBody()->rewind();
 
         return $request;

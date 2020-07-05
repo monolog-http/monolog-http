@@ -82,7 +82,7 @@ final class AbstractSlackAttachmentFormatterTest extends TestCase
         $formatter = new DummySlackAttachmentFormatter();
 
         $exception = new \RuntimeException('foo', 0, new \LogicException('bar'));
-        $formatted = $formatter->format($this->getRecord(Logger::WARNING, 'Message', ['exception' => $exception]));
+        $formatted = $formatter->format($this->createRecord(Logger::WARNING, 'Message', ['exception' => $exception]));
 
         $this->assertArrayNotHasKey('trace', $formatted['attachments'][0]['fields'][0]['exception']);
         $this->assertArrayNotHasKey('previous', $formatted['attachments'][0]['fields'][0]['exception']);
@@ -167,7 +167,7 @@ final class AbstractSlackAttachmentFormatterTest extends TestCase
         $formatter = new DummySlackAttachmentFormatter();
         $largeArray = \range(1, 2000);
 
-        $res = $formatter->format($this->getRecord(Logger::WARNING, 'Message', $largeArray));
+        $res = $formatter->format($this->createRecord(Logger::WARNING, 'Message', $largeArray));
 
         $this->assertCount(1000, $res['attachments'][0]['fields'][0]);
         $this->assertEquals('Over 1000 items, aborting normalization', $res['attachments'][0]['fields'][0]['...']);

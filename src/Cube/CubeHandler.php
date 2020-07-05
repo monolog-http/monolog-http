@@ -65,7 +65,7 @@ final class CubeHandler extends AbstractHttpClientHandler
         $request->getBody()->rewind();
 
         return $request
-            ->withHeader('Content-Type', ['application/json'])
+            ->withHeader('Content-Type', 'application/json')
             ->withHeader('Content-Length', (string)\strlen('[' . $json . ']'));
     }
 }

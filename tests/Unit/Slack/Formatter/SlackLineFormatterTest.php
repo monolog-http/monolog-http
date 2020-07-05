@@ -16,7 +16,7 @@ final class SlackLineFormatterTest extends TestCase
     public function noUsernameByDefault(): void
     {
         $record = new SlackLineFormatter();
-        $data = $record->format($this->getRecord());
+        $data = $record->format($this->createRecord());
         $this->assertArrayNotHasKey('username', $data);
     }
 
@@ -26,7 +26,7 @@ final class SlackLineFormatterTest extends TestCase
     public function addsCustomUsername(): void
     {
         $formatter = new SlackLineFormatter('Monolog bot');
-        $data = $formatter->format($this->getRecord());
+        $data = $formatter->format($this->createRecord());
 
         $this->assertArrayHasKey('username', $data);
         $this->assertSame('Monolog bot', $data['username']);
@@ -38,7 +38,7 @@ final class SlackLineFormatterTest extends TestCase
     public function noIcon(): void
     {
         $formatter = new SlackLineFormatter(null);
-        $data = $formatter->format($this->getRecord());
+        $data = $formatter->format($this->createRecord());
 
         $this->assertArrayNotHasKey('icon_emoji', $data);
     }
@@ -49,7 +49,7 @@ final class SlackLineFormatterTest extends TestCase
     public function attachmentsNotPresent(): void
     {
         $formatter = new SlackLineFormatter();
-        $data = $formatter->format($this->getRecord());
+        $data = $formatter->format($this->createRecord());
         $this->assertArrayNotHasKey('attachments', $data);
     }
 
@@ -59,7 +59,7 @@ final class SlackLineFormatterTest extends TestCase
     public function textEqualsFormatterOutput(): void
     {
         $formatter = new SlackLineFormatter();
-        $data = $formatter->format($this->getRecord(Logger::WARNING, 'Test message'));
+        $data = $formatter->format($this->createRecord(Logger::WARNING, 'Test message'));
 
         $this->assertArrayHasKey('text', $data);
         $this->assertStringStartsWith('test.WARNING: Test message', $data['text']);
@@ -72,7 +72,7 @@ final class SlackLineFormatterTest extends TestCase
     public function correctlyParsesEmoji(string $emoji, string $expectedEmoji): void
     {
         $formatter = new SlackLineFormatter(null, $emoji);
-        $data = $formatter->format($this->getRecord());
+        $data = $formatter->format($this->createRecord());
 
         $this->assertArrayHasKey('icon_emoji', $data);
         $this->assertSame($expectedEmoji, $data['icon_emoji']);
@@ -94,7 +94,7 @@ final class SlackLineFormatterTest extends TestCase
     public function noChannel(): void
     {
         $formatter = new SlackLineFormatter(null, null, null);
-        $data = $formatter->format($this->getRecord());
+        $data = $formatter->format($this->createRecord());
 
         $this->assertArrayNotHasKey('channel', $data);
     }
@@ -105,7 +105,7 @@ final class SlackLineFormatterTest extends TestCase
     public function hasChannel(): void
     {
         $formatter = new SlackLineFormatter(null, null, null, 'my-slack-channel');
-        $data = $formatter->format($this->getRecord());
+        $data = $formatter->format($this->createRecord());
 
         $this->assertArrayHasKey('channel', $data);
         $this->assertSame('my-slack-channel', $data['channel']);

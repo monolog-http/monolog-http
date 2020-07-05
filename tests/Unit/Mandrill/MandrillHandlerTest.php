@@ -5,41 +5,17 @@ declare(strict_types=1);
 namespace MonologHttp\Tests\Unit\Mandrill;
 
 use GuzzleHttp\Psr7\HttpFactory;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
 use MonologHttp\Mandrill\MandrillHandler;
+use MonologHttp\Tests\Unit\HandlerTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\LogLevel;
 
-final class MandrillHandlerTest extends TestCase
+final class MandrillHandlerTest extends HandlerTestCase
 {
-    /**
-     * @var MockObject|ClientInterface
-     */
-    private $httpClient;
-
-    /**
-     * @var Logger
-     */
-    private $logger;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->httpClient = $this->createMock(ClientInterface::class);
-        $this->logger = new Logger('test');
-        $this->logger->pushHandler(
-            new MandrillHandler(
-                $this->httpClient,
-                new HttpFactory(),
-                'apiuser',
-                new \Swift_Message()
-            )
-        );
-    }
-
     /**
      * @test
      */
@@ -64,5 +40,15 @@ final class MandrillHandlerTest extends TestCase
             'ctx2' => 'val2',
             'ctx3' => ['val3'],
         ]);
+    }
+
+    protected function createHandler(): HandlerInterface
+    {
+        return new MandrillHandler(
+            $this->httpClient,
+            new HttpFactory(),
+            'apiuser',
+            new \Swift_Message()
+        );
     }
 }

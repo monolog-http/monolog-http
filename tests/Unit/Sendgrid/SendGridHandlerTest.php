@@ -5,44 +5,18 @@ declare(strict_types=1);
 namespace MonologHttp\Tests\Unit\Sendgrid;
 
 use GuzzleHttp\Psr7\HttpFactory;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
 use MonologHttp\Sendgrid\SendGridHandler;
+use MonologHttp\Tests\Unit\HandlerTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\LogLevel;
 
-final class SendGridHandlerTest extends TestCase
+final class SendGridHandlerTest extends HandlerTestCase
 {
-    /**
-     * @var MockObject|ClientInterface
-     */
-    private $httpClient;
-
-    /**
-     * @var Logger
-     */
-    private $logger;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->httpClient = $this->createMock(ClientInterface::class);
-        $this->logger = new Logger('test');
-        $this->logger->pushHandler(
-            new SendGridHandler(
-                $this->httpClient,
-                new HttpFactory(),
-                'apiuser',
-                'apikey',
-                'from@domain.com',
-                ['to@domain.com'],
-                'There was an error'
-            )
-        );
-    }
-
     /**
      * @test
      */
@@ -63,5 +37,18 @@ final class SendGridHandlerTest extends TestCase
             'ctx2' => 'val2',
             'ctx3' => ['val3'],
         ]);
+    }
+
+    protected function createHandler(): HandlerInterface
+    {
+        return new SendGridHandler(
+            $this->httpClient,
+            new HttpFactory(),
+            'apiuser',
+            'apikey',
+            'from@domain.com',
+            ['to@domain.com'],
+            'There was an error'
+        );
     }
 }

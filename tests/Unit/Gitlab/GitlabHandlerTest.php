@@ -5,41 +5,14 @@ declare(strict_types=1);
 namespace MonologHttp\Tests\Unit\Gitlab;
 
 use GuzzleHttp\Psr7\HttpFactory;
-use Monolog\Logger;
+use Monolog\Handler\HandlerInterface;
 use MonologHttp\Gitlab\GitlabHandler;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-use Psr\Http\Client\ClientInterface;
+use MonologHttp\Tests\Unit\HandlerTestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\LogLevel;
 
-final class GitlabHandlerTest extends TestCase
+final class GitlabHandlerTest extends HandlerTestCase
 {
-    /**
-     * @var MockObject|ClientInterface
-     */
-    private $httpClient;
-
-    /**
-     * @var Logger
-     */
-    private $logger;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->httpClient = $this->createMock(ClientInterface::class);
-        $this->logger = new Logger('test');
-        $this->logger->pushHandler(
-            new GitlabHandler(
-                $this->httpClient,
-                new HttpFactory(),
-                'www.gitlab.com',
-                'authkey'
-            )
-        );
-    }
-
     /**
      * @test
      */
@@ -61,5 +34,15 @@ final class GitlabHandlerTest extends TestCase
             'ctx2' => 'val2',
             'ctx3' => ['val3'],
         ]);
+    }
+
+    protected function createHandler(): HandlerInterface
+    {
+        return new GitlabHandler(
+            $this->httpClient,
+            new HttpFactory(),
+            'www.gitlab.com',
+            'authkey'
+        );
     }
 }

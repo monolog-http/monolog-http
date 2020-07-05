@@ -31,7 +31,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
     public function getAttachmentColor(int $logLevel, string $expectedColour): void
     {
         $formatter = new SlackLongAttachmentFormatter();
-        $data = $formatter->format($this->getRecord($logLevel));
+        $data = $formatter->format($this->createRecord($logLevel));
         $this->assertSame($expectedColour, $data['attachments'][0]['color']);
     }
 
@@ -40,7 +40,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
      */
     public function noUsernameByDefault(): void
     {
-        $data = $this->createFormatter()->format($this->getRecord());
+        $data = $this->createFormatter()->format($this->createRecord());
         $this->assertArrayNotHasKey('username', $data);
     }
 
@@ -50,7 +50,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
     public function addsCustomUsername(): void
     {
         $formatter = new SlackLongAttachmentFormatter('Monolog bot');
-        $data = $formatter->format($this->getRecord());
+        $data = $formatter->format($this->createRecord());
 
         $this->assertArrayHasKey('username', $data);
         $this->assertSame('Monolog bot', $data['username']);
@@ -76,7 +76,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
      */
     public function getEmojiIcon(string $expected): void
     {
-        $data = $this->createFormatter(null, $expected)->format($this->getRecord(Logger::ALERT));
+        $data = $this->createFormatter(null, $expected)->format($this->createRecord(Logger::ALERT));
         $this->assertSame($expected, $data['icon_emoji']);
     }
 
@@ -85,7 +85,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
      */
     public function thatEmojiIconIsNotSend(): void
     {
-        $data = $this->createFormatter()->format($this->getRecord());
+        $data = $this->createFormatter()->format($this->createRecord());
         $this->assertArrayNotHasKey('icon_emoji', $data);
     }
 
@@ -94,7 +94,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
      */
     public function addsTimestampToAttachment(): void
     {
-        $record = $this->getRecord();
+        $record = $this->createRecord();
         $data = $this->createFormatter()->format($record);
 
         $attachment = $data['attachments'][0];
@@ -111,7 +111,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
      */
     public function addsOneAttachment(): void
     {
-        $data = $this->createFormatter()->format($this->getRecord());
+        $data = $this->createFormatter()->format($this->createRecord());
 
         $this->assertArrayHasKey('attachments', $data);
         $this->assertArrayHasKey(0, $data['attachments']);
@@ -123,7 +123,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
      */
     public function addsFallbackAndTextToAttachment(): void
     {
-        $data = $this->createFormatter()->format($this->getRecord(Logger::WARNING, 'Test message'));
+        $data = $this->createFormatter()->format($this->createRecord(Logger::WARNING, 'Test message'));
 
         $this->assertSame('Test message', $data['attachments'][0]['text']);
         $this->assertSame('Test message', $data['attachments'][0]['fallback']);
@@ -135,7 +135,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
     public function addsLongAttachmentWithoutContextAndExtra(): void
     {
         $formatter = new SlackLongAttachmentFormatter(null, 'ghost', false);
-        $data = $formatter->format($this->getRecord(Logger::ERROR, 'test', ['test' => 1]));
+        $data = $formatter->format($this->createRecord(Logger::ERROR, 'test', ['test' => 1]));
 
         $attachment = $data['attachments'][0];
         $this->assertArrayHasKey('title', $attachment);
@@ -155,7 +155,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
         }
 
         $data = $this->createFormatter()
-            ->format($this->getRecord(Logger::WARNING, 'Test message', ['exception_trace' => $trace]));
+            ->format($this->createRecord(Logger::WARNING, 'Test message', ['exception_trace' => $trace]));
         $this->assertStringEndsWith('... (truncated)', $data['attachments'][0]['fields'][0]['value']);
     }
 
@@ -170,7 +170,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
         }
 
         $formatter = new SlackLongAttachmentFormatter();
-        $data = $formatter->format($this->getRecord(Logger::WARNING, 'Test message', ['exception_trace' => [$trace]]));
+        $data = $formatter->format($this->createRecord(Logger::WARNING, 'Test message', ['exception_trace' => [$trace]]));
 
         $this->assertStringEndsWith('... (truncated)```', $data['attachments'][0]['fields'][0]['value']);
     }
@@ -181,7 +181,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
     public function addsCustomChannel(): void
     {
         $formatter = new SlackLongAttachmentFormatter(null, null, true, 'my-slack-channel');
-        $data = $formatter->format($this->getRecord());
+        $data = $formatter->format($this->createRecord());
 
         $this->assertArrayHasKey('channel', $data);
         $this->assertSame('my-slack-channel', $data['channel']);
@@ -193,7 +193,7 @@ final class SlackLongAttachmentFormatterTest extends TestCase
     public function channelIsNotAddedByDefault(): void
     {
         $formatter = new SlackLongAttachmentFormatter();
-        $data = $formatter->format($this->getRecord());
+        $data = $formatter->format($this->createRecord());
 
         $this->assertArrayNotHasKey('channel', $data);
     }

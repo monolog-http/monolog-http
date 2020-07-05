@@ -56,6 +56,6 @@ final class FlowdockHandlerTest extends TestCase
                 return true;
             }));
 
-        $this->handler->handle($this->getRecord(Logger::ALERT));
+        $this->handler->handle($this->createRecord(Logger::ALERT));
     }
 }

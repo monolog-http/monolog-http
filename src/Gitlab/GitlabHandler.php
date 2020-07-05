@@ -63,14 +63,14 @@ final class GitlabHandler extends AbstractHttpClientHandler
 
     protected function createRequest(array $record): RequestInterface
     {
-        $request = $this->requestFactory->createRequest('POST', $this->uri)
-            ->withHeader('Content-Type', ['application/json'])
-            ->withHeader('Authorization', 'Bearer ' . $this->authKey);
-
         $content = \json_encode($record['formatted']);
         if (\JSON_ERROR_NONE !== \json_last_error()) {
             throw new \InvalidArgumentException('Encoding json failed with reason: ' . \json_last_error_msg());
         }
+
+        $request = $this->requestFactory->createRequest('POST', $this->uri)
+            ->withHeader('Content-Type', 'application/json')
+            ->withHeader('Authorization', 'Bearer ' . $this->authKey);
 
         /** @var string $content */
         $request->getBody()->write($content);

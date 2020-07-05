@@ -17,7 +17,6 @@ use Monolog\Handler\HandlerInterface;
 
 final class FlowdockHandler extends AbstractHttpClientHandler
 {
-
     /**
      * @var UriInterface|string
      */
@@ -53,7 +52,7 @@ final class FlowdockHandler extends AbstractHttpClientHandler
         }
 
         $request = $this->requestFactory->createRequest('POST', $this->uri)
-            ->withHeader('Content-Type', ['application/json']);
+            ->withHeader('Content-Type', 'application/json');
 
         /** @var string $body */
         $request->getBody()->write($body);

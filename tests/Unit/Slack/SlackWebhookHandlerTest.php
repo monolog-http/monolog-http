@@ -69,12 +69,12 @@ final class SlackWebhookHandlerTest extends TestCase
 
         $this->client->expects($this->once())
             ->method('sendRequest')
-            ->with($this->callback(function (RequestInterface $value) {
-                $body = $value->getBody()->getContents();
+            ->with($this->callback(function (RequestInterface $value): bool {
+                $body = $value->getBody()->__toString();
                 $this->assertStringContainsString('test.CRITICAL: test', $body);
                 return true;
             }));
-        $this->handler->handle($this->getRecord(Logger::CRITICAL));
+        $this->handler->handle($this->createRecord(Logger::CRITICAL));
     }
 
     /**
@@ -97,7 +97,7 @@ final class SlackWebhookHandlerTest extends TestCase
             ->willThrowException(new \Exception());
 
         $this->expectException(\Exception::class);
-        $this->handler->handle($this->getRecord(Logger::CRITICAL));
+        $this->handler->handle($this->createRecord(Logger::CRITICAL));
     }
 
     /**
@@ -120,7 +120,7 @@ final class SlackWebhookHandlerTest extends TestCase
             ->willThrowException(new \Exception());
 
         $handler = new WhatFailureGroupHandler([$this->handler]);
-        $handler->handle($this->getRecord(Logger::CRITICAL));
+        $handler->handle($this->createRecord(Logger::CRITICAL));
     }
 
     /**
@@ -129,7 +129,7 @@ final class SlackWebhookHandlerTest extends TestCase
     public function handlerDoesNotHandleTheRecord(): void
     {
         $this->client->expects($this->never())->method('sendRequest');
-        $this->handler->handle($this->getRecord());
+        $this->handler->handle($this->createRecord());
     }
 
     /**

@@ -68,6 +68,9 @@ final class MandrillHandler extends AbstractHttpClientHandler
         return $request;
     }
 
+    /**
+     * @return HtmlFormatter
+     */
     public function getDefaultFormatter(): FormatterInterface
     {
         return new HtmlFormatter();
