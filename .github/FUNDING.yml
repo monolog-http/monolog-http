@@ -1,2 +1,4 @@
 # These are supported funding model platforms
+
+# As a tribute we also include seldaek since we highly depend on monolog library.
 github: [gmponos, savvasal, seldaek]
