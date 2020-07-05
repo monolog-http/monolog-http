@@ -14,8 +14,6 @@ use Psr\Http\Message\RequestInterface;
 
 final class MandrillHandler extends AbstractHttpClientHandler
 {
-    private const URL = 'https://mandrillapp.com/api/1.0/messages/send-raw.json';
-
     /**
      * @var \Swift_Message
      */
@@ -56,7 +54,7 @@ final class MandrillHandler extends AbstractHttpClientHandler
         $message->setBody($formatted, $mime);
         $message->setDate(new \DateTimeImmutable());
 
-        $request = $this->requestFactory->createRequest('POST', self::URL);
+        $request = $this->requestFactory->createRequest('POST', 'https://mandrillapp.com/api/1.0/messages/send-raw.json');
         $body = $request->getBody();
         $content = \http_build_query([
             'key' => $this->apiKey,
