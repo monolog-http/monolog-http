@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Tests\Unit\Gitlab;
+namespace MonologHttp\Tests\Unit\Gitter;
 
 use GuzzleHttp\Psr7\HttpFactory;
 use Monolog\Logger;
-use MonologHttp\Gitlab\GitlabHandler;
+use MonologHttp\Gitter\GitterHandler;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\LogLevel;
 
-final class GitlabHandlerTest extends TestCase
+final class GitterHandlerTest extends TestCase
 {
     /**
      * @var MockObject|ClientInterface
@@ -31,11 +31,11 @@ final class GitlabHandlerTest extends TestCase
         $this->httpClient = $this->createMock(ClientInterface::class);
         $this->logger = new Logger('test');
         $this->logger->pushHandler(
-            new GitlabHandler(
+            new GitterHandler(
                 $this->httpClient,
                 new HttpFactory(),
-                'www.gitlab.com',
-                'authkey'
+                'chat_id',
+                'key'
             )
         );
     }
@@ -49,10 +49,9 @@ final class GitlabHandlerTest extends TestCase
             ->method('sendRequest')
             ->with($this->callback(function (RequestInterface $request): bool {
                 $this->assertSame('POST', $request->getMethod());
-                $this->assertSame('www.gitlab.com', $request->getUri()->__toString());
+                $this->assertSame('https://api.gitter.im/v1/rooms/chat_id/chatMessages', $request->getUri()->__toString());
                 $data = \json_decode($request->getBody()->__toString(), true);
-                $this->assertSame('This is an error message', $data['title']);
-                $this->assertSame('critical', $data['level']);
+                $this->assertStringContainsString('test.CRITICAL: This is an error message {"ctx1":"val1","ctx2":"val2","ctx3":["val3"]}', $data['text']);
                 return true;
             }));
 
