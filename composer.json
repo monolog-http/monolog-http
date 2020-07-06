@@ -2,23 +2,14 @@
     "name": "monolog-http/monolog-http",
     "type": "library",
     "description": "A collection of monolog handlers using PSR-18 http client",
-    "keywords": [
-        "monolog",
-        "http",
-        "http-clients",
-        "psr3",
-        "psr17",
-        "psr18",
-        "monolog-http"
-    ],
+    "keywords": ["handler", "http", "http-clients", "monolog", "monolog-http", "psr3", "psr17", "psr18", "gitlab", "slack", "telegram", "gitter", "sendgrid", "cube", "ifttt", "madrill"],
     "homepage": "https://github.com/monolog-http/monolog-http",
     "license": "MIT",
     "authors": [
         {
             "name": "George Mponos",
             "email": "gmponos@gmail.com",
-            "homepage": "https://github.com/gmponos",
-            "role": "Developer"
+            "homepage": "https://github.com/gmponos"
         }
     ],
     "require": {
