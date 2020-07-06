@@ -4,6 +4,15 @@ All notable changes to `monolog-http` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## v0.3.0 - 2020-07-06
+
+### Added
+- Gitter Handler [#27](https://github.com/monolog-http/monolog-http/pull/27)
+- IFTTT Handler [#25](https://github.com/monolog-http/monolog-http/pull/25)
+- Mandrill Handler [#24](https://github.com/monolog-http/monolog-http/pull/24)
+- Generic Handler [#22](https://github.com/monolog-http/monolog-http/pull/22)
+- Flowdock Handler [#19](https://github.com/monolog-http/monolog-http/pull/19)
+
 ## v0.2.0 - 2020-06-24
 
 ### Changed
