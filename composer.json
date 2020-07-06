@@ -1,6 +1,6 @@
 {
     "name": "monolog-http/monolog-http",
-    "type": "library",
+    "type": "monolog-handler",
     "description": "A collection of monolog handlers using PSR-18 http client",
     "keywords": ["handler", "http", "http-clients", "monolog", "monolog-http", "psr3", "psr17", "psr18", "gitlab", "slack", "telegram", "gitter", "sendgrid", "cube", "ifttt", "madrill"],
     "homepage": "https://github.com/monolog-http/monolog-http",
