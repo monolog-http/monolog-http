@@ -28,7 +28,7 @@ final class FlowdockMessageFormatterTest extends TestCase
             'content' => 'This is an error message',
             'tags' => [
                 '#logs', '#critical', '#tech',
-            ]
+            ],
         ];
         $data = $flowdockMessageFormatter->format($record);
         $this->assertEquals($expectedData, $data);

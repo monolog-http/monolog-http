@@ -24,9 +24,13 @@ return PhpCsFixer\Config::create()
         'no_empty_phpdoc' => true,
         'no_extra_blank_lines' => true,
         'no_superfluous_phpdoc_tags' => ['allow_mixed' => true],
+        'no_trailing_comma_in_singleline_array' => true,
+        'no_trailing_whitespace' => true,
+        'no_trailing_whitespace_in_comment' => true,
         'no_unneeded_control_parentheses' => true,
         'no_useless_else' => true,
         'no_useless_return' => true,
+        'no_whitespace_before_comma_in_array' => true,
         'no_whitespace_in_blank_line' => true,
         'normalize_index_brace' => true,
         'php_unit_construct' => true,
@@ -54,7 +58,9 @@ return PhpCsFixer\Config::create()
         'standardize_not_equals' => true,
         'static_lambda' => true,
         'ternary_to_null_coalescing' => true,
+        'trailing_comma_in_multiline_array' => true,
         'trim_array_spaces' => true,
         'void_return' => true,
+        'whitespace_after_comma_in_array' => true,
     ])
     ->setFinder($finder);

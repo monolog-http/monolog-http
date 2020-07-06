@@ -33,7 +33,7 @@ final class FlowdockMessageFormatter implements FlowdockFormatterInterface
 
         $tags = [
             '#logs',
-            '#' . \strtolower($record['level_name'])
+            '#' . \strtolower($record['level_name']),
         ];
         foreach ($record['extra'] as $value) {
             $tags[] = '#' . $value;
