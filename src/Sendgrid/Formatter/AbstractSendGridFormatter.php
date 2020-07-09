@@ -44,7 +44,7 @@ abstract class AbstractSendGridFormatter implements SendGridFormatterInterface
      */
     private $subject;
 
-    public function __construct(string $apiUser, string $apiKey, string $from, array $to, string $subject = null)
+    public function __construct(string $apiUser, string $apiKey, string $from, array $to, ?string $subject = null)
     {
         $this->defaultBodyFormatter = $this->getDefaultFormatter();
         $this->apiUser = $apiUser;
