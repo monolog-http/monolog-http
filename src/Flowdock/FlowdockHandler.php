@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MonologHttp\Flowdock;
 
 use Monolog\Formatter\FormatterInterface;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
 use MonologHttp\AbstractHttpClientHandler;
 use MonologHttp\Flowdock\Formatter\FlowdockFormatterInterface;
@@ -13,7 +14,6 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
-use Monolog\Handler\HandlerInterface;
 
 final class FlowdockHandler extends AbstractHttpClientHandler
 {
@@ -44,6 +44,20 @@ final class FlowdockHandler extends AbstractHttpClientHandler
         $this->flowToken = $flowToken;
     }
 
+    /**
+     * @throws \InvalidArgumentException
+     */
+    public function setFormatter(FormatterInterface $formatter): HandlerInterface
+    {
+        if (!$formatter instanceof FlowdockFormatterInterface) {
+            throw new \InvalidArgumentException(
+                \sprintf('Expected an instance of %s', FlowdockFormatterInterface::class)
+            );
+        }
+
+        return parent::setFormatter($formatter);
+    }
+
     protected function createRequest(array $record): RequestInterface
     {
         $body = \json_encode($record['formatted']);
@@ -59,20 +73,6 @@ final class FlowdockHandler extends AbstractHttpClientHandler
         $request->getBody()->rewind();
 
         return $request;
-    }
-
-    /**
-     * @throws \InvalidArgumentException
-     */
-    public function setFormatter(FormatterInterface $formatter): HandlerInterface
-    {
-        if (!$formatter instanceof FlowdockFormatterInterface) {
-            throw new \InvalidArgumentException(
-                \sprintf('Expected an instance of %s', FlowdockFormatterInterface::class)
-            );
-        }
-
-        return parent::setFormatter($formatter);
     }
 
     /**

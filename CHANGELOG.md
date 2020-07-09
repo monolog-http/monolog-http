@@ -4,6 +4,11 @@ All notable changes to `monolog-http` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## v0.4.0 - 2020-07-09
+
+### Added
+- Twilio Handler [#29](https://github.com/monolog-http/monolog-http/pull/29)
+
 ## v0.3.0 - 2020-07-06
 
 ### Added

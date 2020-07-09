@@ -17,7 +17,7 @@ final class GitlabFormatter implements FormatterInterface
     private $service;
 
     /**
-     * @var array
+     * @var string[]
      */
     private $hosts;
 
@@ -31,6 +31,9 @@ final class GitlabFormatter implements FormatterInterface
      */
     private $lineFormatter;
 
+    /**
+     * @param string[] $hosts
+     */
     public function __construct(
         string $service = null,
         string $monitoringTool = null,
