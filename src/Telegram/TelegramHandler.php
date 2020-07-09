@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace MonologHttp\Telegram;
 
-use Monolog\Formatter\LineFormatter;
 use Monolog\Logger;
 use MonologHttp\AbstractHttpClientHandler;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 
-/**
- * Logs to Telegram.
- */
 final class TelegramHandler extends AbstractHttpClientHandler
 {
     /**

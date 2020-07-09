@@ -30,7 +30,7 @@ final class GitlabHandler extends AbstractHttpClientHandler
     private $service;
 
     /**
-     * @var array
+     * @var string[]
      */
     private $hosts;
 
