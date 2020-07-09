@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace MonologHttp\Tests\Unit\Mandrill;
+namespace MonologHttp\Tests\Unit\Twilio;
 
 use GuzzleHttp\Psr7\HttpFactory;
 use Monolog\Handler\HandlerInterface;
-use MonologHttp\Mandrill\MandrillHandler;
 use MonologHttp\Tests\Unit\HandlerTestCase;
+use MonologHttp\Twilio\TwilioHandler;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\LogLevel;
 
-final class MandrillHandlerTest extends HandlerTestCase
+final class TwilioHandlerTest extends HandlerTestCase
 {
     /**
      * @test
@@ -22,13 +22,8 @@ final class MandrillHandlerTest extends HandlerTestCase
             ->method('sendRequest')
             ->with($this->callback(function (RequestInterface $request): bool {
                 $this->assertSame('POST', $request->getMethod());
-                $this->assertSame('https://mandrillapp.com/api/1.0/messages/send-raw.json', $request->getUri()
-                    ->__toString());
-                $body = [];
-                \parse_str($request->getBody()->__toString(), $body);
-                $this->assertStringStartsWith('Message-ID: ', $body['raw_message']);
-                $this->assertStringContainsString('Content-Type: text/html; charset=utf-8', $body['raw_message']);
-                $this->assertStringContainsString('This is an error message', $body['raw_message']);
+                $content = \json_decode($request->getBody()->__toString(), true);
+                $this->assertSame('This is an error message', $content['Body']);
                 return true;
             }));
 
@@ -41,11 +36,13 @@ final class MandrillHandlerTest extends HandlerTestCase
 
     protected function createHandler(): HandlerInterface
     {
-        return new MandrillHandler(
+        return new TwilioHandler(
             $this->httpClient,
             new HttpFactory(),
-            'apiuser',
-            new \Swift_Message()
+            'sid',
+            'secret',
+            '+35790909090',
+            '+306988008000'
         );
     }
 }

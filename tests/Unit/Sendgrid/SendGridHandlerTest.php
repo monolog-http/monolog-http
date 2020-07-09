@@ -6,12 +6,8 @@ namespace MonologHttp\Tests\Unit\Sendgrid;
 
 use GuzzleHttp\Psr7\HttpFactory;
 use Monolog\Handler\HandlerInterface;
-use Monolog\Logger;
 use MonologHttp\Sendgrid\SendGridHandler;
 use MonologHttp\Tests\Unit\HandlerTestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\LogLevel;
 

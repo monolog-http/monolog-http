@@ -44,6 +44,7 @@ return PhpCsFixer\Config::create()
         'php_unit_test_case_static_method_calls' => ['call_type' => 'this'],
         'phpdoc_align' => ['align' => 'left'],
         'phpdoc_line_span' => ['method' => 'multi', 'property' => 'multi'],
+        'phpdoc_no_package' => true,
         'phpdoc_no_useless_inheritdoc' => true,
         'phpdoc_scalar' => true,
         'phpdoc_single_line_var_spacing' => true,
