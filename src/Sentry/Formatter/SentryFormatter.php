@@ -9,7 +9,7 @@ use Monolog\Logger;
 
 final class SentryFormatter implements FormatterInterface
 {
-    public function format(array $record)
+    public function format(array $record): array
     {
         $data = [
             'level' => $this->getSeverityFromLevel($record['level']),
@@ -40,7 +40,7 @@ final class SentryFormatter implements FormatterInterface
         return $data;
     }
 
-    public function formatBatch(array $records)
+    public function formatBatch(array $records): array
     {
         foreach ($records as $key => $record) {
             $records[$key] = $this->format($record);
