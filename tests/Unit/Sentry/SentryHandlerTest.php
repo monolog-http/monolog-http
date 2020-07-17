@@ -21,6 +21,9 @@ final class SentryHandlerTest extends TestCase
      */
     private $client;
 
+    /**
+     * @var Logger
+     */
     private $logger;
 
     protected function setUp(): void

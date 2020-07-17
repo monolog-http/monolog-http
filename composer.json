@@ -10,6 +10,11 @@
             "name": "George Mponos",
             "email": "gmponos@gmail.com",
             "homepage": "https://github.com/gmponos"
+        },
+        {
+            "name": "Savvas Alexandrou",
+            "email": "savvas@alexandrou.eu",
+            "homepage": "https://savvas.alexandrou.eu"
         }
     ],
     "require": {
