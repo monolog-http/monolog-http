@@ -7,10 +7,8 @@ namespace MonologHttp\Sentry\Formatter;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Logger;
 
-
-class SentryFormatter implements FormatterInterface
+final class SentryFormatter implements FormatterInterface
 {
-
     public function format(array $record)
     {
         $data = [

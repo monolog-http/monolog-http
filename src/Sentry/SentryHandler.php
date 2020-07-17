@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace MonologHttp\Sentry;
 
+use Monolog\Formatter\FormatterInterface;
 use Monolog\Logger;
 use MonologHttp\AbstractHttpClientHandler;
+use MonologHttp\Sentry\Formatter\SentryFormatter;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 
-class SentryHandler extends AbstractHttpClientHandler
+final class SentryHandler extends AbstractHttpClientHandler
 {
 
     /**
@@ -47,7 +49,6 @@ class SentryHandler extends AbstractHttpClientHandler
         $this->sentryVersion = $sentryVersion;
     }
 
-
     protected function createRequest(array $record): RequestInterface
     {
         $body = \json_encode($record['formatted']);
@@ -58,8 +59,8 @@ class SentryHandler extends AbstractHttpClientHandler
         $request = $this->requestFactory->createRequest('POST', $this->uri)
             ->withHeader('Content-Type', 'application/json')
             ->withHeader('X-Sentry-Auth', [
-                sprintf('Sentry sentry_version=%s', $this->sentryVersion),
-                sprintf('sentry_key=%s', $this->sentryKey)
+                \sprintf('Sentry sentry_version=%s', $this->sentryVersion),
+                \sprintf('sentry_key=%s', $this->sentryKey),
             ]);
 
         /** @var string $body */
@@ -67,5 +68,13 @@ class SentryHandler extends AbstractHttpClientHandler
         $request->getBody()->rewind();
 
         return $request;
+    }
+
+    /**
+     * @return SentryFormatter
+     */
+    protected function getDefaultFormatter(): FormatterInterface
+    {
+        return new SentryFormatter();
     }
 }
