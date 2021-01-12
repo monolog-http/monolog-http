@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.2|^8.0",
         "ext-json": "*",
         "monolog/monolog": "^2.0",
         "psr/http-client": "^1.0",
