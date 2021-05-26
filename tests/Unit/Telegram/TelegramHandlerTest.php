@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests\Unit\Telegram;
 
-use GuzzleHttp\Psr7\HttpFactory;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Monolog\Handler\HandlerInterface;
 use MonologHttp\Telegram\TelegramHandler;
 use MonologHttp\Tests\Unit\HandlerTestCase;
@@ -41,7 +41,7 @@ final class TelegramHandlerTest extends HandlerTestCase
     {
         return new TelegramHandler(
             $this->httpClient,
-            new HttpFactory(),
+            new Psr17Factory(),
             'TelegramApiKey',
             '1234'
         );
