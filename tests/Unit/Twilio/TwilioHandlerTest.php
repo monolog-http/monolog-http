@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests\Unit\Twilio;
 
-use GuzzleHttp\Psr7\HttpFactory;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Monolog\Handler\HandlerInterface;
 use MonologHttp\Tests\Unit\HandlerTestCase;
 use MonologHttp\Twilio\TwilioHandler;
@@ -38,7 +38,7 @@ final class TwilioHandlerTest extends HandlerTestCase
     {
         return new TwilioHandler(
             $this->httpClient,
-            new HttpFactory(),
+            new Psr17Factory(),
             'sid',
             'secret',
             '+35790909090',

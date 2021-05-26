@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests\Unit\Sendgrid;
 
-use GuzzleHttp\Psr7\HttpFactory;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Monolog\Handler\HandlerInterface;
 use MonologHttp\Sendgrid\SendGridHandler;
 use MonologHttp\Tests\Unit\HandlerTestCase;
@@ -39,7 +39,7 @@ final class SendGridHandlerTest extends HandlerTestCase
     {
         return new SendGridHandler(
             $this->httpClient,
-            new HttpFactory(),
+            new Psr17Factory(),
             'apiuser',
             'apikey',
             'from@domain.com',

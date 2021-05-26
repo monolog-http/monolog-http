@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests\Unit\Sentry;
 
-use GuzzleHttp\Psr7\HttpFactory;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use GuzzleHttp\Psr7\Uri;
 use Monolog\Logger;
 use MonologHttp\Sentry\SentryHandler;
@@ -33,7 +33,7 @@ final class SentryHandlerTest extends TestCase
         $uri = new Uri('https://b70a3:b7d80@sentry.example.com/1/api/1/store');
         $handler = new SentryHandler(
             $this->client,
-            new HttpFactory(),
+            new Psr17Factory(),
             $uri,
             'sentryKey'
         );
