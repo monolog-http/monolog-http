@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests\Unit\Flowdock;
 
-use Nyholm\Psr7\Factory\Psr17Factory;
+use GuzzleHttp\Psr7\HttpFactory;
 use GuzzleHttp\Psr7\Uri;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Logger;
@@ -31,7 +31,7 @@ final class FlowdockHandlerTest extends TestCase
         parent::setUp();
         $this->client = $this->createMock(ClientInterface::class);
         $uri = new Uri('https://api.example.com/messages');
-        $this->handler = new FlowdockHandler($this->client, new Psr17Factory(), $uri, 'asecretflowtoken');
+        $this->handler = new FlowdockHandler($this->client, new HttpFactory(), $uri, 'asecretflowtoken');
     }
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests\Unit\Gitter;
 
-use Nyholm\Psr7\Factory\Psr17Factory;
+use GuzzleHttp\Psr7\HttpFactory;
 use Monolog\Logger;
 use MonologHttp\Gitter\GitterHandler;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -33,7 +33,7 @@ final class GitterHandlerTest extends TestCase
         $this->logger->pushHandler(
             new GitterHandler(
                 $this->httpClient,
-                new Psr17Factory(),
+                new HttpFactory(),
                 'chat_id',
                 'key'
             )

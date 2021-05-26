@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests\Unit\Mandrill;
 
-use Nyholm\Psr7\Factory\Psr17Factory;
+use GuzzleHttp\Psr7\HttpFactory;
 use Monolog\Handler\HandlerInterface;
 use MonologHttp\Mandrill\MandrillHandler;
 use MonologHttp\Tests\Unit\HandlerTestCase;
@@ -43,7 +43,7 @@ final class MandrillHandlerTest extends HandlerTestCase
     {
         return new MandrillHandler(
             $this->httpClient,
-            new Psr17Factory(),
+            new HttpFactory(),
             'apiuser',
             new \Swift_Message()
         );

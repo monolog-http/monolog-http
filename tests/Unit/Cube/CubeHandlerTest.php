@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests\Unit\Cube;
 
-use Nyholm\Psr7\Factory\Psr17Factory;
+use GuzzleHttp\Psr7\HttpFactory;
 use Monolog\Logger;
 use MonologHttp\Cube\CubeHandler;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -30,7 +30,7 @@ final class CubeHandlerTest extends TestCase
         parent::setUp();
         $this->httpClient = $this->createMock(ClientInterface::class);
         $this->logger = new Logger('test');
-        $this->logger->pushHandler(new CubeHandler($this->httpClient, new Psr17Factory(), 'www.mydomain.com'));
+        $this->logger->pushHandler(new CubeHandler($this->httpClient, new HttpFactory(), 'www.mydomain.com'));
     }
 
     /**

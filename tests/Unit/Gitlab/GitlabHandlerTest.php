@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MonologHttp\Tests\Unit\Gitlab;
 
-use Nyholm\Psr7\Factory\Psr17Factory;
+use GuzzleHttp\Psr7\HttpFactory;
 use Monolog\Handler\HandlerInterface;
 use MonologHttp\Gitlab\GitlabHandler;
 use MonologHttp\Tests\Unit\HandlerTestCase;
@@ -40,7 +40,7 @@ final class GitlabHandlerTest extends HandlerTestCase
     {
         return new GitlabHandler(
             $this->httpClient,
-            new Psr17Factory(),
+            new HttpFactory(),
             'www.gitlab.com',
             'authkey'
         );
